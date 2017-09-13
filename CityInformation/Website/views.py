@@ -1,30 +1,55 @@
+from django.http import Http404
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.template import loader
+from .models import College
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.views.generic import View
+from .forms import UserForm
 
-# Home Page
+
 def index(request):
-    return HttpResponse("""<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="style.css">
-	</head>
-	<body>
-		<div id="wrapper">
-			<div id="title">
-			<img src="http://www.adstockglobal.com/wp-content/uploads/2016/02/City-Info.png">
-			</div>
-			<div id="regologin">
-				<input type="submit" value="Register">
-				<input type="submit" value="Login">
-			</div>
-			<div id="main">
-			I AM THE MAIN THINGO
-			</div>
-		</div>
-	
-	
-	</body>
+    all_college = College.objects.all()
+    return render(request, 'Website/index.html', {'all_college': all_college})
 
 
-</html>
+def detail(request, college_id):
+    try:
+        college = College.objects.get(id=college_id)
+    except College.DoesNotExist:
+        raise Http404("College does not exist")
+    return render(request, 'Website/detail.html', {'college': college})
 
- """)
+class UserFormView(View):
+    form_class = UserForm
+    template_name = 'Website/registration_form.html'
+
+    #display blank forms
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+    #process form data
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+
+            user = form.save(commit=False)
+
+            #cleaned (normalized) data
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user.set_password(password)
+            user.save()
+
+            #returns User objects if credentials are correct
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+
+                if user.is_active:
+                    login(request, user)
+                    return redirect('Website:index')
+
+        return render(request, self.template_name, {'form': form})

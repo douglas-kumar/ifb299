@@ -1,0 +1,14 @@
+{%  extends 'Website/base.html' %}
+
+{% block body %}
+    {% if all_college %}
+        <h3>Here are all the colleges:</h3>
+        <ul>
+            {% for college in all_college %}
+            <li><a href="/Website/{{ college.id }}/">{{ college.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>You don't have any college</h3>
+    {% endif %}
+{%  endblock %}
