@@ -12,3 +12,9 @@ class College(models.Model):
     def __str__(self):
         return self.name + ' - ' + self.address
 
+class City(models.Model):
+    name = models.CharField(max_length=250)
+    state = models.CharField(max_length=60)
+
+    def __str__(self):
+        return self.name + " " + self.state

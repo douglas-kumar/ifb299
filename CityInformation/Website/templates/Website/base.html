@@ -6,7 +6,6 @@
 <!--	<link rel="stylesheet" type="text/css" href="Website/default.css"> -->
 </head>
 <body>
-
 	<style>
 	.dropbtn {
     background-color: #4CAF50;
@@ -48,17 +47,20 @@
     background-color: #3e8e41;
 }
 	</style>
-	
-	<button class="dropbtn">Home</button>
-	<button class="dropbtn">My Favourites</button>
-	<button class="dropbtn">My Reviews</button>
-	<button class="dropbtn">Login/Logout</button>
-	<button class="dropbtn">Register</button>
+			
+	<script>
+	</script>
+
+	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/'">Home</button>
+	<button class="dropbtn" onclick="location.href = '#'">My Favourites</button>
+	<button class="dropbtn" onclick="location.href = '#'">My Reviews</button>
+	<button class="dropbtn" onclick="location.href = '#'">Login/Logout</button>
+	<button id="rgstr" class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/register/'">Register</button>
 	<div class="dropdown">
 		<button class="dropbtn">City</button>
 		<div class="dropdown-content">
-		<a href="#">Brisbane</a>
-		<a href="#">Sydney</a>
+		<a href="#Brisbane">Brisbane</a>
+		<a href="Sydney">Sydney</a>
 		<a href="#">Melbourne</a>
 		<a href="#">Canberra</a>
 		<a href="#">Perth</a>
