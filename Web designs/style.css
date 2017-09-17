@@ -27,3 +27,81 @@ body {
 	background-color:white;
 	clear: both;
 }
+
+.menuCityPage {
+	width: 495px;
+	height: 100px;
+	display: inline-block;
+	text-align: left;
+}
+
+.cityTitle {
+	width: 495px;
+	height: 100px;
+	display: inline-block;
+
+	
+}
+
+.map {
+	display: inline-block;
+	width: 495px;
+	height:200px;
+}
+
+.events{
+	width: 495px;
+	height: 200px;
+	display: inline-block;
+}
+
+.title {
+	width: 300px;
+	height:100px;
+	display: inline-block;
+}
+
+.menuItemPage {
+	width: 195px;
+	height: 100px;
+	display: inline-block;
+}
+
+.titleItemPage {
+	width: 600px;
+	height: 100px;
+	display: inline-block;
+}
+
+.sortItemPage {
+	width: 195px;
+	height: 100px;
+	display: inline-block;
+}
+
+.itemPageImage {
+	width: 180px;
+	height:300px;
+	padding-right: 10px;
+	text-align: left;
+	display: inline-block;
+}
+.itemWrapper{
+	width: 790px;
+	height: 300px;
+	display: inline-block;
+}
+
+
+.itemTitle {
+	width: 790px;
+	height: 100px;
+	display: inline-block;
+	margin-bottom: 150px;
+}
+
+.itemInfo {
+	width: 790px;
+	height: 195px;
+	display: inline-block;
+}
