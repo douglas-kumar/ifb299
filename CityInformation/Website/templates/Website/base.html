@@ -50,11 +50,28 @@
 			
 	<script>
 	</script>
-
+	
+	{% if user.username %}
+    <button class="dropbtn">Hello {{ user.username }}!</button>
 	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/'">Home</button>
 	<button class="dropbtn" onclick="location.href = '#'">My Favourites</button>
 	<button class="dropbtn" onclick="location.href = '#'">My Reviews</button>
-	<button class="dropbtn" onclick="location.href = '#'">Login/Logout</button>
+		<div class="dropdown">
+		<button class="dropbtn">City</button>
+		<div class="dropdown-content">
+		<a href="#Brisbane">Brisbane</a>
+		<a href="Sydney">Sydney</a>
+		<a href="#">Melbourne</a>
+		<a href="#">Canberra</a>
+		<a href="#">Perth</a>
+		<a href="#">Adelaide</a>
+		<a href="#">Darwin</a>
+		<a href="#">Tasmania</a>
+		</div></div>
+					<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/logout'">Logout</button>
+        {% else %}
+	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/'">Home</button>
+	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/login/'">Login</button>
 	<button id="rgstr" class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/register/'">Register</button>
 	<div class="dropdown">
 		<button class="dropbtn">City</button>
@@ -69,6 +86,7 @@
 		<a href="#">Tasmania</a>
 		</div>
 	</div>
+	{% endif %}
 	
 {% block body %}
 {% endblock %}
