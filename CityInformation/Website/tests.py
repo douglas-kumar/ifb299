@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from .models import College
+from .urls import *
 
 # To Run tests:
 # python manage.py test Website.tests
@@ -61,3 +62,15 @@ class UserAccessControl(TestCase):
         for page in self.admin_pages:
             response = client.get(page)
             self.assertEqual(response.status_code, 404)
+
+# Story No: 4 - Menu (Calum)
+class MenuNavigation(TestCase):
+    urls = [
+        "http://127.0.0.1:8000/Website/",
+        "http://127.0.0.1:8000/Website/register",
+        "http://127.0.0.1:8000/logout",
+        "http://127.0.0.1:8000/login",
+    ]
+
+    def test_navigation_works(self):
+        pass
