@@ -6,6 +6,7 @@ from .urls import *
 # To Run tests:
 # python manage.py test Website.tests
 
+
 # Story No: 6 - Create New Admin User
 class AddSecondAdminUser(TestCase):
     username = 'admin2'
@@ -35,33 +36,49 @@ class AddSecondAdminUser(TestCase):
 class UserAccessControl(TestCase):
     user_username = 'xXx_user_xXx'
     user_password = 'getREKTson'
+
+    admin_username = 'admin2'
+    admin_password = 'ILoveAmbiguity'
+
     admin_pages = [
-        "/admin/"
-        "/admin/auth"
-        "/admin/auth/group"
-        "/admin/auth/group/add"
-        "/admin/auth/user"
-        "/admin/auth/user/add"
-        "/admin/Website/college/"
-        "/admin/password_change"
+        '/admin/login/?next=/admin/',
+        '/admin/',
+        '/admin/auth',
+        '/admin/auth/group',
+        '/admin/auth/group/add',
+        '/admin/auth/user',
+        '/admin/auth/user/add',
+        '/admin/Website/college/',
+        '/admin/password_change',
     ]
 
     def create_user(self):
         user, created = User.objects.get_or_create(username=self.user_username)
-        user.set_password(self.user_password)
+        user.set_password = self.user_password
         user.is_staff = False
         user.is_superuser = False
         user.save()
         self.user = user
 
+    # User cannot access Admin Panel
     def test_user_access(self):
         self.create_user()
-        client = Client()
-        client.login(username=self.user_username, password=self.user_password)
-
         for page in self.admin_pages:
-            response = client.get(page)
-            self.assertEqual(response.status_code, 404)
+            self.client.get(page)
+            self.assertFalse(self.client.login(username=self.user_username, password=self.user_password))
+
+    def create_admin(self):
+        admin = User.objects.create_superuser(self.admin_username, 'somebody@email.com', self.admin_password)
+        admin.save()
+
+    # Admin can access Admin Panel
+    def test_admin_access(self):
+        self.create_admin()
+        for page in self.admin_pages:
+            self.client.get(page)
+            self.assertTrue(self.client.login(username=self.admin_username, password=self.admin_password))
+
+    # NOTE: tests checking user privileges on website needed (i.e. editing information about items)
 
 # Story No: 4 - Menu (Calum)
 class MenuNavigation(TestCase):
