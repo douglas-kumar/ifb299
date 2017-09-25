@@ -91,3 +91,21 @@ class MenuNavigation(TestCase):
 
     def test_navigation_works(self):
         pass
+
+# Story No: 15 - Log Out (Ruka)
+class LogOut(TestCase):
+    username = 'user'
+    password = 'userpassword'
+    email = 'user@email.com'
+
+    def test_create_new_user(self):
+        user = User.objects.create_user(self.username, self.email, self.password)
+        user.save()
+
+    def test_user_login_success(self):
+        client = Client()
+        client.login(username=self.username, password=self.password)
+
+    def test_userlogout_success(self):
+        client = Client()
+        client.logout()
