@@ -20,6 +20,13 @@ def detail(request, college_id):
         raise Http404("College does not exist")
     return render(request, 'Website/detail.html', {'college': college})
 
+def brisbane(request, city_name):
+    try:
+        city = City.objects.get(name=city_name)
+    except City.DoesNotExist:
+        raise Http404("City does not exist")
+    return render(request, 'Website/brisbane.html', {'city': city})
+
 class UserFormView(View):
     form_class = UserForm
     template_name = 'Website/registration_form.html'
