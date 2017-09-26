@@ -6,8 +6,25 @@ from .urls import *
 # To Run tests:
 # python manage.py test Website.tests
 
+# Story: S03 - Log In
+class CreateUserAndLogIn(TestCase):
+    username = 'userToLogin'
+    email = 'user2login@website.com'
+    password = 'UserPassword1'
 
-# Story No: 6 - Create New Admin User
+    def setup_new_user(self):
+        user = User.objects.create_user(self.username, self.email, self.password)
+
+    def log_user_in(self):
+        user = authenticate(username=username, password=password)
+        client = Client()
+        if user is not None:
+            client.login(username=self.username, password=self.password)
+            response = self.client.get('/users/secure/', follow=True)
+            user = User.objects.get(username=self.username)
+            self.assertEqual(response.context['email'], self.email)
+
+# Story: S06 - Create New Admin User
 class AddSecondAdminUser(TestCase):
     username = 'admin2'
     password = 'Password1'
