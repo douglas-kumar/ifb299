@@ -9,4 +9,8 @@ urlpatterns = [
 
     # /Website/712/
     url(r'^(?P<college_id>[0-9]+)/$', views.detail, name='detail'),
+   
+    # /website/brisbane
+    url(r'^(?P<city_name>Brisbane)/$', views.brisbane, name='brisbane'),
+    
 ]
