@@ -24,18 +24,35 @@ class CreateUserAndLogIn(TestCase):
             user = User.objects.get(username=self.username)
             self.assertEqual(response.context['email'], self.email)
 
-# Story: S06 - Create New Admin User
-class AddSecondAdminUser(TestCase):
+# Story No: 2 - Account Creation (Will)
+class CreateNewAccount(TestCase):
+    username = 'new_user'
+    password = 'UniquePassword1'
+    email = 'new_user@example.com'
+
+    def setUp(self):
+        user = User.objects.create_user(self.username)
+        user.email = self.email
+        user.set_password(self.password)
+        user.save()
+
+    def test_user_created_in_db(self):
+        user = User.objects.get(username='new_user')
+        assert user.email == self.email
+        assert user.is_staff == False
+        assert user.is_superuser == False
+
+# Story No: 6 - Create New Admin User (Will)
+class AddNewAdminUser(TestCase):
     username = 'admin2'
     password = 'Password1'
     email = 'admin2@example.com'
 
-    def test_create_new_admin_object(self):
+    def setUp(self):
         admin_user = User.objects.create_superuser(self.username, self.email, self.password)
         admin_user.save()
 
     def test_admin_creation_success(self):
-        self.test_create_new_admin_object()
         admin = User.objects.get(username=self.username)
 
         self.assertEqual(admin.username, 'admin2')
@@ -48,9 +65,8 @@ class AddSecondAdminUser(TestCase):
         client = Client()
         client.login(username=self.username, password=self.password)
 
-
-# Story No: 12 - Access Control
-class UserAccessControl(TestCase):
+# Story No: 12 - Access Control (Will)
+class AccessControl(TestCase):
     user_username = 'xXx_user_xXx'
     user_password = 'getREKTson'
 
