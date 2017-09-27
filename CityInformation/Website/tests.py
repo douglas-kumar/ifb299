@@ -142,3 +142,19 @@ class LogOut(TestCase):
     def test_userlogout_success(self):
         client = Client()
         client.logout()
+        
+# Story No: 10 - City Map
+class CityMap(TestCase):
+
+    city_name = "Brisbane"
+    city_state = "QLD"
+    city_longitude = None
+    city_latitude = None
+
+    
+    #Test database to check if lat and long can be null
+    def test_latlng_null(self):
+        try:
+            self.assertFalse(City.objects.create(name=self.city_name, state=self.city_state, longitude=self.city_longitude, latitude=self.city_latitude))
+        except IntegrityError:
+            print("Can't Be null")
