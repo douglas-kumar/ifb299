@@ -157,6 +157,6 @@ class CityMap(TestCase):
     #Test database to check if lat and long can be null
     def test_latlng_null(self):
         try:
-            self.assertFalse(City.objects.create(name=self.city_name, state=self.city_state, longitude=self.city_longitude, latitude=self.city_latitude))
+            City.objects.create(name=self.city_name, state=self.city_state, longitude=self.city_longitude, latitude=self.city_latitude)
         except IntegrityError:
             print("Can't Be null")
