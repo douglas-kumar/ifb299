@@ -1,7 +1,9 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from .models import College
+from Website.models import City
 from .urls import *
+rom django.db import IntegrityError
 
 # To Run tests:
 # python manage.py test Website.tests
