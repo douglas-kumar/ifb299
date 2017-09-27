@@ -2,6 +2,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.template import loader
 from .models import College
+from .models import City
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
