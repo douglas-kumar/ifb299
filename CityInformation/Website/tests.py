@@ -144,6 +144,15 @@ class LogOut(TestCase):
     def test_userlogout_success(self):
         client = Client()
         client.logout()
+
+# Story No: 7 - Modify City Information (Ruka)
+class ModifyCityInfo(TestCase):
+    def test_modify(self):
+        College.objects.create(name="Uni", address="Somewhere", departments="Business, Medicine...etc.",
+                               email="imhere@email.com", image="https://image.jpg")
+        College.objects.filter(name="Uni").update(address="Here")
+        temp = College.objects.get(name="Uni")
+        self.assertEqual(temp.address, "Here")
         
 # Story No: 10 - City Map
 class CityMap(TestCase):

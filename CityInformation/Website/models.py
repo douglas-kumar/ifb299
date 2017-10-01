@@ -20,3 +20,15 @@ class City(models.Model):
 
     def __str__(self):
         return self.name + " " + self.state
+
+class Library(models.Model):
+    name = models.CharField(max_length=250)
+    address = models.CharField(max_length=500)
+    phone = models.CharField(max_length=250)
+    email = models.CharField(max_length=250, null=True)
+    image = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.name
+
+
