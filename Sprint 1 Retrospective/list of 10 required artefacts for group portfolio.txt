@@ -1,0 +1,10 @@
+Douglus 1.justfication
+Douglus 2.Logical and Physical diagrams of the chosen architecture pattern for Smart City project
+Will 3.Component Diagram for Smart City project
+Simon 4.Data Flow Diagram for Smart City project
+everyone 5.UI designs (mock-up)
+Calum and Luke 6.class diagram
+Calum 7.ERD
+8.Prepare database design from the data model
+9.Write SQL script to create the database
+10.Prepare test data to populate the database with INSERT
