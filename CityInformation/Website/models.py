@@ -15,8 +15,8 @@ class College(models.Model):
 class City(models.Model):
     name = models.CharField(max_length=250)
     state = models.CharField(max_length=60)
-    longitude = models.CharField(max_length=60)
-    latitude = models.CharField(max_length=60)
+    latitude = models.DecimalField(max_digits=60, decimal_places=10)
+    longitude = models.DecimalField(max_digits=60, decimal_places=10)
 
     def __str__(self):
         return self.name + " " + self.state
