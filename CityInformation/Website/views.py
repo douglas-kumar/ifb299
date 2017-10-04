@@ -58,6 +58,6 @@ class UserFormView(View):
 
                 if user.is_active:
                     login(request, user)
-                    return redirect('Website:index')
+                    return redirect('/Website/')
 
         return render(request, self.template_name, {'form': form})
