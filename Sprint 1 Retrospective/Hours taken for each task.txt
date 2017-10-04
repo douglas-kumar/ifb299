@@ -1,0 +1,28 @@
+...
+T13: 2
+T14: 2
+T15: 3
+T16: 1
+T17: 3
+T18: 4
+total = 15
+T19: 1hr
+T20: 2
+T21: 3
+T22: 3
+T23: 2
+total = 11
+....
+T34: 3hrs
+T35: 3hrs
+T36: 10hrs
+T37: 7hrs
+T38: 2hrs
+total= 25
+T39: 3hrs
+T40: 2hrs
+T41: 6hrs
+T42: --
+T43: --
+total=
+...
