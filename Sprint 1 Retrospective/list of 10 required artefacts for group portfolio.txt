@@ -6,5 +6,5 @@ everyone 5.UI designs (mock-up)
 Calum and Luke 6.class diagram
 Calum 7.ERD
 8.Prepare database design from the data model
-9.Write SQL script to create the database
-10.Prepare test data to populate the database with INSERT
+Calum 9.Write SQL script to create the database
+Will 10.Prepare test data to populate the database with INSERT
