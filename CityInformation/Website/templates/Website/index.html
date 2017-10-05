@@ -17,7 +17,7 @@
                         <h4>{{ college.address }}</h4>
 
                         <!-- View Details -->
-                        <a href="#" class="btn btn-primary btn-sm" role="button">View Details</a>
+                        <a href="{% url 'Website:detail' college.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
 
                         <!-- Edit College -->
                         <a href="#" class="btn btn-default btn-sm">

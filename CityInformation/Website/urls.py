@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^register/$', views.UserFormView.as_view(), name='register'),
 
     # /Website/712/
-    url(r'^(?P<college_id>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
    
     # /website/brisbane
     url(r'^(?P<city_name>Brisbane)/$', views.brisbane, name='brisbane'),
