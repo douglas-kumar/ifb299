@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 class College(models.Model):
@@ -8,6 +8,9 @@ class College(models.Model):
     departments = models.CharField(max_length=500)
     email = models.CharField(max_length=250, null=True)
     image = models.CharField(max_length=1000)
+
+    def get_absolute_url(self):
+        return reverse('Website:detail', kwargs={'pk' : self.pk})
 
     def __str__(self):
         return self.name + ' - ' + self.address
