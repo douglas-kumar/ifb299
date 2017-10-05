@@ -6,20 +6,20 @@ from .models import City
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
+from django.views import generic
 from .forms import UserForm
 
 
-def index(request):
-    all_college = College.objects.all()
-    return render(request, 'Website/index.html', {'all_college': all_college})
+class IndexView(generic.ListView):
+    template_name = 'Website/index.html'
+    context_object_name = 'college_list'
 
+    def get_queryset(self):
+        return College.objects.all()
 
-def detail(request, college_id):
-    try:
-        college = College.objects.get(id=college_id)
-    except College.DoesNotExist:
-        raise Http404("College does not exist")
-    return render(request, 'Website/detail.html', {'college': college})
+class DetailView(generic.DetailView):
+    model = College
+    template_name = 'Website/detail.html'
 
 def brisbane(request, city_name):
     try:
