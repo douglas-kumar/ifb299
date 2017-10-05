@@ -1,15 +1,49 @@
-<!DOCTYPE html>
-{%  extends 'Website/base.html' %}
+{% extends 'Website/base.html' %}
+
 {% block body %}
-    {% if all_college %}
-		<br/>
-        <h3>Here are all the colleges:</h3>
-        <ul>
-            {% for college in all_college %}
-            <li><a href="/Website/{{ college.id }}/">{{ college.name }}</a></li>
+<div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Here are all the colleges</h3>
+        </div>
+        {% if college_list %}
+            {% for college in college_list %}
+                <div class="col-sm-4 col-lg-2">
+                    <a href="{% url 'Website:detail' college.id %}">
+                        <img src="{{ college.image }}" class="img-responsive">
+                    </a>
+                    <div class="caption">
+                        <h2>{{ college.name }}</h2>
+                        <h4>{{ college.address }}</h4>
+
+                        <!-- View Details -->
+                        <a href="#" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+                        <!-- Edit College -->
+                        <a href="#" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+
+                        <!-- Delete College -->
+                        <a href="#" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </div>
+                </div>
             {% endfor %}
-        </ul>
-    {% else %}
-        <h3>You don't have any college</h3>
-    {% endif %}
+
+        {% else %}
+            <div class="col-sm-12">
+                <br>
+                <a href="#">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Album
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+
 {%  endblock %}
