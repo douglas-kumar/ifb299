@@ -2,62 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'Website/css/default.css' %}">
     <title>CityInformation</title>
-<!--	<link rel="stylesheet" type="text/css" href="Website/default.css"> -->
 </head>
 <body>
-	<style>
-	.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropbtn:hover {
-    background-color: #3e8e41;
-}
-	</style>
-			
-	<script>
-	</script>
-	
+<div class="the-menu">
 	{% if user.username %}
-    <button class="dropbtn">Hello {{ user.username }}!</button>
-	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/'">Home</button>
-	<button class="dropbtn" onclick="location.href = '#'">My Favourites</button>
-	<button class="dropbtn" onclick="location.href = '#'">My Reviews</button>
+    <button class="dropbtn">Hello {{ user.username }}!  <img class="menu-icons" src="{% static 'Website/images/happy.png' %}" alt=" happy.png" /></button>
+	{% load static %}
+	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/'">Home <img class="menu-icons" src="{% static 'Website/images/home.png' %}" alt=" home.png" /></button>
+	<button class="dropbtn" onclick="location.href = '#'">My Favourites  <img class="menu-icons" src="{% static 'Website/images/fav.png' %}" alt=" fav.png" /></button>
+	<button class="dropbtn" onclick="location.href = '#'">My Reviews  <img class="menu-icons" src="{% static 'Website/images/review.png' %}" alt=" review.png" /></button>
 		<div class="dropdown">
-		<button class="dropbtn">City</button>
+		<button class="dropbtn">City <img class="menu-icons" src="{% static 'Website/images/city.png' %}" alt=" city.png" /></button>
 		<div class="dropdown-content">
 		<a href="http://127.0.0.1:8000/Website/Brisbane/">Brisbane</a>
 		<a href="Sydney">Sydney</a>
@@ -68,13 +26,16 @@
 		<a href="#">Darwin</a>
 		<a href="#">Tasmania</a>
 		</div></div>
-					<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/logout'">Logout</button>
+					<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/logout'">Logout  <img class="menu-icons" src="{% static 'Website/images/logout.png' %}" alt=" logout.png" /></button>
+					</div>
         {% else %}
-	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/'">Home</button>
-	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/login/'">Login</button>
-	<button id="rgstr" class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/register/'">Register</button>
+		<div class="the-menu">
+	{% load static %}
+	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/'">Home <img class="menu-icons" src="{% static 'Website/images/home.png' %}" alt=" home.png" /></button>
+	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/login/'">Login <img class="menu-icons" src="{% static 'Website/images/login.png' %}" alt=" login.png" /></button>
+	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/register/'">Register  <img class="menu-icons" src="{% static 'Website/images/register.png' %}" alt=" register.png" /></button>
 	<div class="dropdown">
-		<button class="dropbtn">City</button>
+		<button class="dropbtn">City <img class="menu-icons" src="{% static 'Website/images/city.png' %}" alt=" city.png" /></button>
 		<div class="dropdown-content">
 		<a href="http://127.0.0.1:8000/Website/Brisbane/">Brisbane</a>
 		<a href="Sydney">Sydney</a>
@@ -85,6 +46,7 @@
 		<a href="#">Darwin</a>
 		<a href="#">Tasmania</a>
 		</div>
+	</div>
 	</div>
 	{% endif %}
 	

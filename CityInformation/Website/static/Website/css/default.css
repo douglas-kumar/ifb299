@@ -1,11 +1,13 @@
 .dropbtn {
-    background-color: #4CAF50;
+    background-color: #0d8ee5; /*#4CAF50;*/
     color: white;
     padding: 16px;
     font-size: 16px;
     border: none;
     cursor: pointer;
 }
+
+.dropbtn:hover {background-color: #00558e;}
 
 .dropdown {
     position: relative;
@@ -35,5 +37,21 @@
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    background-color: #00558e; /*#3e8e41;*/
+}
+
+.menu-icons {
+	width: 20px;
+	height: 20px;
+}
+
+.the-menu {
+	background-color: #0d8ee5;
+	/*position: relative;*/
+}
+
+img {
+	width: 20px;
+	height: 20px;
+	border: 1px solid #ffffff;
 }
