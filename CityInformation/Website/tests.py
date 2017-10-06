@@ -169,3 +169,33 @@ class CityMap(TestCase):
             City.objects.create(name=self.city_name, state=self.city_state, longitude=self.city_longitude, latitude=self.city_latitude)
         except IntegrityError:
             print("Can't Be null")
+
+            #Story No: 5  - Main View
+class MainView(TestCase):
+    username = 'stuff'
+    password = 'works'
+    account_type = "STUDENT"
+    
+    
+    def create_user(self):
+        user, created = User.objects.get_or_create(username=self.username)
+        user.set_password = self.password
+        user.save()
+        
+
+        user_acc = User.objects.get(username=self.username)
+        user_pk = user_acc.pk
+        user_acc2 = Profile.objects.get(user_id=user_pk)
+        user_acc2.user_type = self.account_type
+        user_acc2.save()
+        
+        self.user = user
+
+        
+    #Test to see if the data is stored
+    def test_account_type(self):
+        self.create_user()
+        userdj = User.objects.get(username=self.user)
+        userdj_pk = userdj.pk
+        userprofile = Profile.objects.get(user_id=userdj_pk)
+        self.assertTrue(self.account_type, userprofile.user_type)
