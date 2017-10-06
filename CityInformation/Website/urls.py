@@ -9,6 +9,10 @@ urlpatterns = [
 
     url(r'^register/$', views.UserFormView.as_view(), name='register'),
 
+    url(r'^login/$', views.LoginFormView.as_view(), name='login'),
+
+    url(r'^logout/$', views.LogOut, name='logout'),
+
     # /Website/712/
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
    

@@ -32,13 +32,13 @@
 		<a href="#">Darwin</a>
 		<a href="#">Tasmania</a>
 		</div></div>
-					<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/logout'">Logout  <img class="menu-icons" src="{% static 'Website/images/logout.png' %}" alt=" logout.png" /></button>
+					<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/logout'">Logout  <img class="menu-icons" src="{% static 'Website/images/logout.png' %}" alt=" logout.png" /></button>
 					</div>
         {% else %}
 		<div class="the-menu">
 	{% load static %}
 	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/'">Home <img class="menu-icons" src="{% static 'Website/images/home.png' %}" alt=" home.png" /></button>
-	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/login/'">Login <img class="menu-icons" src="{% static 'Website/images/login.png' %}" alt=" login.png" /></button>
+	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/login/'">Login <img class="menu-icons" src="{% static 'Website/images/login.png' %}" alt=" login.png" /></button>
 	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/register/'">Register  <img class="menu-icons" src="{% static 'Website/images/register.png' %}" alt=" register.png" /></button>
 	<div class="dropdown">
 		<button class="dropbtn">City <img class="menu-icons" src="{% static 'Website/images/city.png' %}" alt=" city.png" /></button>
