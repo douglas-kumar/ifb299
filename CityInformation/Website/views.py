@@ -6,6 +6,7 @@ from .models import City
 from .models import Profile
 from .models import Mall
 from .models import Library
+from .models import Hotel
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -23,6 +24,7 @@ class IndexView(generic.ListView):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['college_list'] = College.objects.all()
         context['mall_list'] = Mall.objects.all()
+        context['hotel_list'] = Hotel.objects.all()
         return context
 
 class DetailView(generic.DetailView):
