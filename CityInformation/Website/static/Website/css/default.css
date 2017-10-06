@@ -7,7 +7,11 @@
     cursor: pointer;
 }
 
-.dropbtn:hover {background-color: #00558e;}
+.dropbtn:hover {background-color: #00558e}
+
+#welcome-btn {cursor: auto}
+
+#welcome-btn:hover {background-color: #0d8ee5}
 
 .dropdown {
     position: relative;
@@ -47,11 +51,9 @@
 
 .the-menu {
 	background-color: #0d8ee5;
-	/*position: relative;*/
 }
 
 img {
 	width: 20px;
 	height: 20px;
-	border: 1px solid #ffffff;
 }
