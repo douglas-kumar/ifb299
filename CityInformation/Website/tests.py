@@ -146,16 +146,6 @@ class Menu(TestCase):
         client = Client()
         response = self.client.get('/Website/login/')
         self.assertEqual(response.status_code, 200)
-
-##    needs to be added to main menu
-##    def test_map_page_works(self):
-##        client = Client()
-##        response = self.client.get('/Website/Brisbane/')
-##        self.assertEqual(response.status_code, 200)
-    def test_redirects_to_login(self):
-        client = Client()
-        response = self.client.post('/Website/register/')
-        self.assertRedirects(response, '/Website/register/', 200)
         
 # Story No: 15 - Log Out (Ruka)
 class LogOut(TestCase):
