@@ -3,8 +3,10 @@ from django.shortcuts import render
 from django.template import loader
 from .models import College
 from .models import City
+from .models import Profile
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.views.generic import View
 from django.views import generic
 from .forms import UserForm
@@ -48,8 +50,19 @@ class UserFormView(View):
             #cleaned (normalized) data
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+            account_type = form.cleaned_data['account_type']
+            
+            
             user.set_password(password)
             user.save()
+            
+            #get user object to add account_type - get userId to get profile - silly work around, probably some other way to do it
+            
+            user_acc = User.objects.get(username=username)
+            user_pk = user_acc.pk
+            user_acc2 = Profile.objects.get(user_id=user_pk)
+            user_acc2.user_type = account_type
+            user_acc2.save()
 
             #returns User objects if credentials are correct
             user = authenticate(username=username, password=password)
