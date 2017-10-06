@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from .models import College
+from .models import Profile
 from Website.models import City
 from .urls import *
 from django.db import IntegrityError
