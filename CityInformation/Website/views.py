@@ -4,6 +4,8 @@ from django.template import loader
 from .models import College
 from .models import City
 from .models import Profile
+from .models import Mall
+from .models import Library
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
