@@ -10,7 +10,7 @@
             {% for college in college_list %}
                 <div class="col-sm-4 col-lg-2">
                     <a href="{% url 'Website:detail' college.id %}">
-                        <img src="{{ college.image }}" class="img-responsive">
+                        <img src="{{ college.image }}" class="img-responsive" style="width:200px;height:200px">
                     </a>
                     <div class="caption">
                         <h2>{{ college.name }}</h2>
