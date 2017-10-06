@@ -14,10 +14,14 @@ from .forms import UserForm, LoginForm
 
 class IndexView(generic.ListView):
     template_name = 'Website/index.html'
-    context_object_name = 'college_list'
-
-    def get_queryset(self):
-        return College.objects.all()
+    context_object_name = 'stuff_list'
+    queryset = Library.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['college_list'] = College.objects.all()
+        context['mall_list'] = Mall.objects.all()
+        return context
 
 class DetailView(generic.DetailView):
     model = College
