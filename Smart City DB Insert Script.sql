@@ -1,6 +1,6 @@
-INSERT INTO user VALUES (1, "admin", "admin@example.com", "Passw0rd1", 4);
-INSERT INTO user VALUES (2, "user1", "user1@gmail.com", "IamThebest", 3);
-INSERT INTO user VALUES (3, "big_lez", "thebiglezshow@gmail.com", "BigLez123", 1);
+INSERT INTO user VALUES (1, "admin", "admin@example.com", "Passw0rd1", "admin");
+INSERT INTO user VALUES (2, "user1", "user1@gmail.com", "IamThebest", "student");
+INSERT INTO user VALUES (3, "big_lez", "thebiglezshow@gmail.com", "BigLez123", "business");
 INSERT INTO city VALUES (1, "Brisbane", "Queensland", 27.46, 153.02);
 INSERT INTO city VALUES (2, "Sydney", "New South Wales", 33.87, 151.21);
 INSERT INTO city VALUES (3, "Melbourne", "Victoria", 37.81, 144.96);
