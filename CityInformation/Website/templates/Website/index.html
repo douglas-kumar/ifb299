@@ -2,7 +2,7 @@
 
 {% block body %}
 <div>
-    <div class="row">
+	<div class="row">
 	<!-- Don't ask my why but it breaks without this -->
 	{% if user.profile.user_type == 'STUDENT' %}
 		<div class="col-sm-12">
@@ -46,18 +46,23 @@
                     </button>
                 </a>
             </div>
+	
         {% endif %}
 	{% endif %}	
 	</div>
 	
 	
 	<div class="row">
+	<!-- Don't ask my why but it breaks without this -->
+	{% if user.profile.user_type == 'STUDENT' %}
+	<div class="col-sm-12">
+		<h3>Here are all the Malls</h3>
+	</div>
+	{% endif %}	
 		{% if user.profile.user_type == 'TOURIST' %}
 			{% if mall_list %}
 				{% for mall in mall_list %}
-					<div class="col-sm-12">
-						<h3>Here are all the Malls</h3>
-					</div>
+					
 					<div class="col-sm-4 col-lg-2">
 						<a href="">
 							<img src="{{ mall.image }}" class="img-responsive" style="width:200px;height:200px">
@@ -142,7 +147,5 @@
 			{% endif %}
 		{% endif %}		
     </div>
-	
 </div>
-
 {%  endblock %}
