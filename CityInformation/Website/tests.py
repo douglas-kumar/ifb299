@@ -5,6 +5,7 @@ from .models import Profile
 from Website.models import City
 from .urls import *
 from django.db import IntegrityError
+from django.urls import reverse, resolve
 
 # To Run tests:
 # python manage.py test Website.tests
@@ -117,17 +118,45 @@ class AccessControl(TestCase):
     # NOTE: tests checking user privileges on website needed (i.e. editing information about items)
 
 # Story No: 4 - Menu (Calum)
-class MenuNavigation(TestCase):
+class Menu(TestCase):
     urls = [
-        "http://127.0.0.1:8000/Website/",
-        "http://127.0.0.1:8000/Website/register",
-        "http://127.0.0.1:8000/logout",
-        "http://127.0.0.1:8000/login",
+        "/Website/",
+        "/Website/register/",
+        "/Website/logout/",
+        "/Website/login/",
+        "/Website/Brisbane/"
     ]
 
-    def test_navigation_works(self):
-        pass
+    def test_index_page_works(self):
+        client = Client()
+        response = self.client.get('/Website/')
+        self.assertEqual(response.status_code, 200)
 
+    def test_register_page_works(self):
+        client = Client()
+        response = self.client.get('/Website/register/')
+        self.assertEqual(response.status_code, 200)
+        
+    def test_logout_page_works(self):
+        client = Client()
+        response = self.client.get('/Website/logout/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_page_works(self):
+        client = Client()
+        response = self.client.get('/Website/login/')
+        self.assertEqual(response.status_code, 200)
+
+##    needs to be added to main menu
+##    def test_map_page_works(self):
+##        client = Client()
+##        response = self.client.get('/Website/Brisbane/')
+##        self.assertEqual(response.status_code, 200)
+    def test_redirects_to_login(self):
+        client = Client()
+        response = self.client.post('/Website/register/')
+        self.assertRedirects(response, '/Website/register/', 200)
+        
 # Story No: 15 - Log Out (Ruka)
 class LogOut(TestCase):
     username = 'user'
