@@ -1,11 +1,11 @@
 {% extends 'Website/base.html' %}
 
 {% block body %}
-<h1>Brisbane</h1>
+<h1>{{city.name}}</h1>
 <div id="map" style="width:100%;height:400px;"></div>
 	<script>
 		function myMap() {
-		  var myCenter = new google.maps.LatLng(-27.4698, 153.0251);
+		  var myCenter = new google.maps.LatLng({{city.latitude}}, {{city.longitude}});
 		  var mapCanvas = document.getElementById("map");
 		  var mapOptions = {center: myCenter, zoom: 10};
 		  var map = new google.maps.Map(mapCanvas, mapOptions);

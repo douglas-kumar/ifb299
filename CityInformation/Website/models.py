@@ -5,7 +5,17 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # Models for DB migration
+class City(models.Model):
+    name = models.CharField(max_length=250)
+    state = models.CharField(max_length=60)
+    latitude = models.DecimalField(max_digits=60, decimal_places=10)
+    longitude = models.DecimalField(max_digits=60, decimal_places=10)
+
+    def __str__(self):
+        return self.name + " " + self.state
+
 class College(models.Model):
+    #city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
     departments = models.CharField(max_length=500)
@@ -18,16 +28,8 @@ class College(models.Model):
     def __str__(self):
         return self.name + ' - ' + self.address
 
-class City(models.Model):
-    name = models.CharField(max_length=250)
-    state = models.CharField(max_length=60)
-    latitude = models.DecimalField(max_digits=60, decimal_places=10)
-    longitude = models.DecimalField(max_digits=60, decimal_places=10)
-
-    def __str__(self):
-        return self.name + " " + self.state
-
 class Library(models.Model):
+    #city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
     phone = models.CharField(max_length=250)
@@ -38,6 +40,7 @@ class Library(models.Model):
         return self.name
 
 class Event(models.Model):
+    #city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     description = models.CharField(max_length=1000)
 
@@ -45,6 +48,7 @@ class Event(models.Model):
         return self.name
 
 class PublicTrans(models.Model):
+    #city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     description = models.CharField(max_length=1000)
 
@@ -52,6 +56,7 @@ class PublicTrans(models.Model):
         return self.name
 
 class Industries(models.Model):
+    #city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
     industryType = models.CharField(max_length=500)
@@ -62,6 +67,7 @@ class Industries(models.Model):
         return self.name + ' - ' + self.address
 
 class Hotel(models.Model):
+    #city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
     phone = models.CharField(max_length=250)
@@ -72,6 +78,7 @@ class Hotel(models.Model):
         return self.name + ' - ' + self.address
 
 class Park(models.Model):
+    #city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
     phone = models.CharField(max_length=250)
@@ -82,6 +89,7 @@ class Park(models.Model):
         return self.name + ' - ' + self.address
 
 class Zoo(models.Model):
+    #city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
     phone = models.CharField(max_length=250)
@@ -92,6 +100,7 @@ class Zoo(models.Model):
         return self.name + ' - ' + self.address
 
 class Museum(models.Model):
+    #city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
     phone = models.CharField(max_length=250)
@@ -102,6 +111,7 @@ class Museum(models.Model):
         return self.name + ' - ' + self.address
 
 class Restaurant(models.Model):
+    #city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
     phone = models.CharField(max_length=250)
@@ -112,6 +122,7 @@ class Restaurant(models.Model):
         return self.name + ' - ' + self.address
 
 class Mall(models.Model):
+    #city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
     phone = models.CharField(max_length=250)

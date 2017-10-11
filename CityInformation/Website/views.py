@@ -32,12 +32,12 @@ class DetailView(generic.DetailView):
     template_name = 'Website/detail.html'
 
 # process Brisbane info and city map in html 
-def brisbane(request, city_name):
+def city_map(request, city_name):
     try:
         city = City.objects.get(name=city_name)
     except City.DoesNotExist:
         raise Http404("City does not exist")
-    return render(request, 'Website/brisbane.html', {'city': city})
+    return render(request, 'Website/city.html', {'city': city})
 
 class UserFormView(View):
     form_class = UserForm
