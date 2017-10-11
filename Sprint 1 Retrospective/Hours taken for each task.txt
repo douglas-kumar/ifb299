@@ -28,8 +28,8 @@ total= 25
 T39: 3hrs
 T40: 2hrs
 T41: 6hrs
-T42: --
-T43: --
+T42: 5hrs
+T43: 2hrs
 total=
 T44: 2
 T45: 12
