@@ -16,7 +16,7 @@ class City(models.Model):
 
 
 class Event(models.Model):
-    #city = models.ForeignKey(City, on_delete=models.CASCADE)
+    city = models.ForeignKey('City', on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=250)
     description = models.CharField(max_length=1000)
 
@@ -24,7 +24,7 @@ class Event(models.Model):
         return self.name
 
 class PublicTrans(models.Model):
-    #city = models.ForeignKey(City, on_delete=models.CASCADE)
+    city = models.ForeignKey('City', on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=250)
     description = models.CharField(max_length=1000)
 
@@ -33,7 +33,7 @@ class PublicTrans(models.Model):
 
 
 class locationInfo(models.Model):
-    #city = models.ForeignKey(City, on_delete=models.CASCADE)
+    city = models.ForeignKey('City', on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
     email = models.CharField(max_length=250, null=True)
