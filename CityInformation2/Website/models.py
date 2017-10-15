@@ -3,6 +3,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import inspect
+from enum import Enum
 
 # Models for DB migration
 class City(models.Model):
@@ -31,6 +33,27 @@ class PublicTrans(models.Model):
     def __str__(self):
         return self.name
 
+class ChoiceEnum(Enum):
+    @classmethod
+    def choices(cls):
+        # get all members of the class
+        members = inspect.getmembers(cls, lambda m: not(inspect.isroutine(m)))
+        # filter down to just properties
+        props = [m for m in members if not(m[0][:2] == '__')]
+        # format into django choice tuple
+        choices = tuple([(str(p[1].value), p[0]) for p in props])
+        return choices
+
+class StudentTypes(ChoiceEnum):
+    College = 0
+    Library = 1
+    Indusry = 2
+    Hotel = 3
+    Park = 4
+    Zoo = 5
+    Museum = 6
+    Restaurant = 7
+    Mall = 8
 
 class locationInfo(models.Model):
     city = models.ForeignKey('City', on_delete=models.CASCADE, null=True)
@@ -41,9 +64,13 @@ class locationInfo(models.Model):
     phone = models.CharField(max_length=250, null=True, blank=True)
     industryType = models.CharField(max_length=500, null=True, blank=True)
     departments = models.CharField(max_length=500, null=True, blank=True)
+    infoType = models.CharField(max_length=1, choices=StudentTypes.choices(), null=True)
 
     def __str__(self):
         return self.name
+#When specifying the infoType elsewhere in the code,
+#import StudentTypes and type as follows
+#junior_students = Student.objects.filter(student_type=StudentTypes.College.value)
 
 
 # Extend the User model for user types   
