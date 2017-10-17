@@ -4,7 +4,7 @@
 	<h1>{{city.name}}</h1>
 
 			<div id="map" style="width:400px;height:400px;"></div>
-
+			
 			<script>
 				function myMap() {
 				  var myCenter = new google.maps.LatLng({{city.latitude}},{{city.longitude}});
@@ -15,6 +15,17 @@
 				  marker.setMap(map);
 				}
 			</script>
-
+			
 			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmjFijuozw5beUzVgLy9HtfrbgTCR1K6I&callback=myMap"></script>
+			
+	{% for facilities in college_list %}
+	<h2>{{ facilities.name }}</h2>
+	<h4>{{ facilities.address }}</h4>
+	<h5>{{ facilities.email }}</h5>
+	{% endfor %}
+
+
+
+			
+			
 {%  endblock %}

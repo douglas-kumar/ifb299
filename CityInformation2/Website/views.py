@@ -7,6 +7,7 @@ from django.template import loader
 # from .models import Mall
 # from .models import Library
 # from .models import Hotel
+from .models import *
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -16,8 +17,23 @@ from .forms import UserForm, LoginForm
 
 
 class IndexView(generic.ListView):
-    template_name = 'Website/index.html'
-    context_object_name = 'stuff_list'
+    #template should be 'Website/index.html'
+    template_name = 'Website/city.html' #INDEX NEEDS TO BE CHANGED
+    context_object_name = 'facility_list'
+    queryset = LocationInfo.objects.all()
+
+##    def city_map(request, city_name):
+##        try:
+##            city = City.objects.get(name=city_name)
+##        except City.DoesNotExist:
+##            raise Http404("City does not exist")
+##        return render(request, 'Website/city.html', {'city': city})
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['college_list'] = LocationInfo.objects.all()
+        return context
+
 #     queryset = Library.objects.all()
 #
 #     def get_context_data(self, **kwargs):
@@ -76,7 +92,7 @@ class UserFormView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('/Website/')
+                    return redirect('/Website/Brisbane') #change Brisbane
 
         return render(request, self.template_name, {'form': form})
 
@@ -108,3 +124,6 @@ def LogOut(request):
     logout(request)
     template_name = 'registration/logged_out.html'
     return render(request, template_name)
+
+class CityView(View):
+    pass

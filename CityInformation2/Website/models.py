@@ -55,7 +55,7 @@ class StudentTypes(ChoiceEnum):
     Restaurant = 7
     Mall = 8
 
-class locationInfo(models.Model):
+class LocationInfo(models.Model):
     city = models.ForeignKey('City', on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
