@@ -1,12 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render
 from django.template import loader
-# from .models import College
-# from .models import City
-# from .models import Profile
-# from .models import Mall
-# from .models import Library
-# from .models import Hotel
 from .models import *
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -19,7 +13,7 @@ from .forms import UserForm, LoginForm
 
 class IndexView(generic.ListView):
     #template should be 'Website/index.html'
-    template_name = 'Website/city.html' #INDEX NEEDS TO BE CHANGED
+    template_name = 'Website/index.html' #INDEX NEEDS TO BE CHANGED
     context_object_name = 'facility_list'
     queryset = LocationInfo.objects.all()
 
@@ -60,6 +54,15 @@ def city_map(request, city_name):
     except City.DoesNotExist:
         raise Http404("City does not exist")
     return render(request, 'Website/city.html', {'city': city})
+
+# was testing to see if this reads it into the html??? Maybe I'm wrong
+def city_info(request, location_info_name):
+    try:
+        location_info = LocationInfo.objects.get.all()
+    except:
+        raise Http404("Item not found")
+    return render(request, 'Website/city.html', {'locationinfo': location_info})
+#########################################################################
 
 class UserFormView(View):
     form_class = UserForm
@@ -131,5 +134,20 @@ def LogOut(request):
     template_name = 'registration/logged_out.html'
     return render(request, template_name)
 
-class CityView(View):
-    pass
+class CityView(generic.ListView):
+    template_name = 'Website/city.html'
+    context_object_name = 'facility_list'
+    queryset = LocationInfo.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(CityView, self).get_context_data(**kwargs)
+        context['college_list'] = LocationInfo.objects.all()
+        return context
+
+##    def city_map(request, city_name):
+##        try:
+##            city = City.objects.get(name=city_name)
+##        except City.DoesNotExist:
+##            raise Http404("City does not exist")
+##        return render(request, template_name, {'city': city})
+

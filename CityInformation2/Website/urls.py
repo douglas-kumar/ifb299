@@ -16,11 +16,15 @@ urlpatterns = [
     # /Website/712/
     # url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
 
+    #url(r'^(?P<city_name>Brisbane)/$', views.city_map, name='brisbane'),
+
     # /Website/Brisbane
     url(r'^(?P<city_name>Brisbane)/$', views.city_map, name='brisbane'),
+
+    url(r'^(?P<city_name>Sydney)/$', views.city_map, name='sydney'),
    
     # /website/Sydney
-    url(r'^(?P<city_name>Sydney)/$', views.city_map, name='sydney'),
+    #url(r'^(?P<city_name>Sydney)/$', views.city_map, name='sydney'),
 
     # /website/Melbourne
     url(r'^(?P<city_name>Melbourne)/$', views.city_map, name='melbourne'),
