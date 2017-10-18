@@ -16,6 +16,8 @@ class IndexView(generic.ListView):
     template_name = 'Website/index.html' #INDEX NEEDS TO BE CHANGED
     context_object_name = 'facility_list'
     queryset = LocationInfo.objects.all()
+    #context_object_name = 'stuff_list'
+    #queryset = LocationInfo.objects.all()
 
 ##    def city_map(request, city_name):
 ##        try:
@@ -29,10 +31,6 @@ class IndexView(generic.ListView):
         context['college_list'] = LocationInfo.objects.filter(infoType=InfoTypes.College.value)
         return context
 
-        # When specifying the infoType elsewhere in the code,
-        # import StudentTypes and type as follows
-        # junior_students = Student.objects.filter(student_type=StudentTypes.College.value)
-
 
 #     queryset = Library.objects.all()
 #
@@ -43,9 +41,9 @@ class IndexView(generic.ListView):
 #         context['hotel_list'] = Hotel.objects.all()
 #         return context
 
-# class DetailView(generic.DetailView):
-#     model = College
-#     template_name = 'Website/detail.html'
+class DetailView(generic.DetailView):
+    model = LocationInfo
+    template_name = 'Website/detail.html'
 
 # process Brisbane info and city map in html 
 def city_map(request, city_name):
