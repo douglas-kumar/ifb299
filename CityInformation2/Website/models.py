@@ -44,7 +44,7 @@ class ChoiceEnum(Enum):
         choices = tuple([(str(p[1].value), p[0]) for p in props])
         return choices
 
-class StudentTypes(ChoiceEnum):
+class InfoTypes(ChoiceEnum):
     College = 0
     Library = 1
     Indusry = 2
@@ -64,7 +64,7 @@ class LocationInfo(models.Model):
     phone = models.CharField(max_length=250, null=True, blank=True)
     industryType = models.CharField(max_length=500, null=True, blank=True)
     departments = models.CharField(max_length=500, null=True, blank=True)
-    infoType = models.CharField(max_length=1, choices=StudentTypes.choices(), null=True)
+    infoType = models.CharField(max_length=1, choices=InfoTypes.choices(), null=True)
 
     def __str__(self):
         return self.name

@@ -16,6 +16,7 @@ from django.views import generic
 from .forms import UserForm, LoginForm
 
 
+
 class IndexView(generic.ListView):
     #template should be 'Website/index.html'
     template_name = 'Website/city.html' #INDEX NEEDS TO BE CHANGED
@@ -31,8 +32,13 @@ class IndexView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['college_list'] = LocationInfo.objects.all()
+        context['college_list'] = LocationInfo.objects.filter(infoType=InfoTypes.College.value)
         return context
+
+        # When specifying the infoType elsewhere in the code,
+        # import StudentTypes and type as follows
+        # junior_students = Student.objects.filter(student_type=StudentTypes.College.value)
+
 
 #     queryset = Library.objects.all()
 #
