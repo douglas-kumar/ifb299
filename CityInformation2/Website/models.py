@@ -86,3 +86,26 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+# Model for User Reviews
+
+DEFAULT_CHOICES = (
+    ('5', '5'),
+    ('4', '4'),
+    ('3', '3'),
+    ('2', '2'),
+    ('1', '1'),
+)
+
+class Review(models.Model):
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    place = models.ForeignKey('LocationInfo', on_delete=models.CASCADE)
+    rating = models.AutoField()
+
+    @receiver(post_save, sender=User)
+    def create_review(sender, instance, created, **kwargs):
+        if created:
+            Review.objects.create(user=instance)
+    @receiver(post_save, sender=User)
+    def save_review(sender, instance, **kwargs):
+        instance.review.save()
