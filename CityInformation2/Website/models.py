@@ -18,7 +18,7 @@ class City(models.Model):
 
 
 class Event(models.Model):
-    city = models.ForeignKey('City', on_delete=models.CASCADE, null=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=250)
     description = models.CharField(max_length=1000)
 
@@ -26,7 +26,7 @@ class Event(models.Model):
         return self.name
 
 class PublicTrans(models.Model):
-    city = models.ForeignKey('City', on_delete=models.CASCADE, null=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=250)
     description = models.CharField(max_length=1000)
 
@@ -56,7 +56,7 @@ class InfoTypes(ChoiceEnum):
     Mall = 8
 
 class LocationInfo(models.Model):
-    city = models.ForeignKey('City', on_delete=models.CASCADE, null=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=250)
     address = models.CharField(max_length=500)
     email = models.CharField(max_length=250, null=True)
@@ -97,15 +97,15 @@ DEFAULT_CHOICES = (
     ('1', '1'),
 )
 
-class Review(models.Model):
-    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
-    place = models.ForeignKey('LocationInfo', on_delete=models.CASCADE)
-    rating = models.AutoField()
-
-    @receiver(post_save, sender=User)
-    def create_review(sender, instance, created, **kwargs):
-        if created:
-            Review.objects.create(user=instance)
-    @receiver(post_save, sender=User)
-    def save_review(sender, instance, **kwargs):
-        instance.review.save()
+##class Review(models.Model):
+##    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+##    place = models.ForeignKey('LocationInfo', on_delete=models.CASCADE)
+##    rating = models.AutoField()
+##
+##    @receiver(post_save, sender=User)
+##    def create_review(sender, instance, created, **kwargs):
+##        if created:
+##            Review.objects.create(user=instance)
+##    @receiver(post_save, sender=User)
+##    def save_review(sender, instance, **kwargs):
+##        instance.review.save()

@@ -59,7 +59,7 @@ def city_info(request, location_info_name):
         location_info = LocationInfo.objects.get.all()
     except:
         raise Http404("Item not found")
-    return render(request, 'Website/city.html', {'locationinfo': location_info})
+    return render(request, 'Website/city.html', {'location_info': location_info})
 #########################################################################
 
 class UserFormView(View):
