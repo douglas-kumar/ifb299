@@ -7,6 +7,12 @@ ACCOUNT_TYPES = [
     ('BUSINESS', 'Business'),
 ]
 
+INFO_TYPES = [
+    ('0', 'College'),
+    ('9', 'All'),
+]
+
+
 # extend User table to include the user's type
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -22,3 +28,7 @@ class UserForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput)
     password = forms.CharField(widget=forms.PasswordInput)
+    
+class SearchForm(forms.Form):
+    search_name = forms.CharField(widget=forms.TextInput)
+    info_type = forms.ChoiceField(choices=INFO_TYPES, required=True)
