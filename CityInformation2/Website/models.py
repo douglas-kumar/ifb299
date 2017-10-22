@@ -67,7 +67,7 @@ class LocationInfo(models.Model):
     infoType = models.CharField(max_length=1, choices=InfoTypes.choices(), null=True)
 
     def __str__(self):
-        return self.name
+        return self.name + ' - ' + self.address
 #When specifying the infoType elsewhere in the code,
 #import StudentTypes and type as follows
 #junior_students = Student.objects.filter(student_type=StudentTypes.College.value)
