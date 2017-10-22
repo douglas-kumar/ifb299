@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^login/$', views.LoginFormView.as_view(), name='login'),
 
     url(r'^logout/$', views.LogOut, name='logout'),
+    
+    url(r'^search/$', views.Search, name='search'),
 
     # /Website/712/
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
