@@ -33,7 +33,15 @@
 		<a href="http://127.0.0.1:8000/Website/Hobart">Hobart</a>
 		</div></div>
 					<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/logout'">Logout  <img class="menu-icons" src="{% static 'Website/images/logout.png' %}" alt=" logout.png" /></button>
-					</div>
+	<form action='/Website/search/' method="GET">
+		<input type="text" name="search_name">
+		<select name='info_type' required>
+			<option value='9'>All</option>
+			<option value='0'>College</option>
+		</select>
+		<input type="submit" value="Search">
+	</form>				
+	</div>
         {% else %}
 		<div class="the-menu">
 	{% load static %}
