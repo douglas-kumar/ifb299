@@ -1,6 +1,8 @@
 {% extends 'Website/base.html' %}
 {% block body %}
-
+	{% if match %}
+	<b> No matches found!</b>
+	{% endif %}
 	{% if search %}
 		{% for item in search %}
 			<h2>{{ item.name }}</h2>
@@ -9,7 +11,7 @@
 			<a href="{% url 'Website:detail' item.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
 		{% endfor %}
 	{% else %}
-		<b> No matches found!</b>
+		
 	
 	{% endif %}
 	

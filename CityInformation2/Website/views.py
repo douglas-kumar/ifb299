@@ -152,7 +152,7 @@ class CityView(generic.ListView):
 
 def Search(request):
     template_name = 'Website/search.html'
-    
+   
     if request.method == 'GET':
         form = SearchForm(request.GET)
         if form.is_valid():
@@ -165,8 +165,9 @@ def Search(request):
             else:
                 search = LocationInfo.objects.filter(name=search_name).filter(infoType=info_type)
         else:
-            return render(request, template_name)
+            search = LocationInfo.objects.all()
+            match = 1
+            return render(request, template_name, {'search': search, 'match': match})
         
     return render(request, template_name, {'search': search})
-
 
