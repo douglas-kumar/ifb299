@@ -55,9 +55,9 @@ def city_map(request, city_name):
     return render(request, 'Website/city.html', {'city': city})
 
 # was testing to see if this reads it into the html??? Maybe I'm wrong
-def city_info(request, location_info_name):
+def city_info(request, city_id):
     try:
-        location_info = LocationInfo.objects.get.all()
+        location_info = LocationInfo.objects.get(city=city_id)
     except:
         raise Http404("Item not found")
     return render(request, 'Website/city.html', {'location_info': location_info})

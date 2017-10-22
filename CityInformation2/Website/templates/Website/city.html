@@ -1,7 +1,11 @@
 {% extends 'Website/base.html' %}
 {% block body %}
 	
-	<h1>{{city.name}}</h1>
+	<h1>{{city.name}}{{ location_info.city }}</h1>
+	<h2>{{ location_info.name }}</h2>
+	<h6>{{ location_info.phone }}</h6>
+	
+	<img src="{ location_info.image }" alt="college.png" />
 
 			<div id="map" style="width:400px;height:400px;"></div>
 			
@@ -18,13 +22,6 @@
 			
 			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmjFijuozw5beUzVgLy9HtfrbgTCR1K6I&callback=myMap"></script>
 			<br/>
-			<!-- for testing purposes (does not read locationinfo or event or publictrans) -->
-			{{ city.name }}
-			{{ city.latitude }}
-			{{ user.username }}
-			{{ event.city }}
-			{{ location_info.name }}
-			{{ location_info.city }}
-			{{ publictrans.name }}
+
 			
 {%  endblock %}

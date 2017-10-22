@@ -16,12 +16,24 @@ urlpatterns = [
     url(r'^search/$', views.Search, name='search'),
 
     # /Website/712/
-    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+    # url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
 
-    #url(r'^(?P<city_name>Brisbane)/$', views.city_map, name='brisbane'),
+    url(r'^(?P<city_name>Brisbane)/$', views.city_map, name='brisbane'),
 
     # /Website/Brisbane
-    url(r'^(?P<city_name>Brisbane)/$', views.city_map, name='brisbane'),
+	
+	# Reading in values of foreign key - ADD MORE VALUES
+	#Url for these are: /Website/X --> Where X is the id number 
+	url(r'^(?P<city_id>1)/$', views.city_info), # doesn't work
+	url(r'^(?P<city_id>2)/$', views.city_info),
+	url(r'^(?P<city_id>3)/$', views.city_info),
+	url(r'^(?P<city_id>4)/$', views.city_info),
+	url(r'^(?P<city_id>5)/$', views.city_info),
+    url(r'^(?P<city_id>6)/$', views.city_info),
+	url(r'^(?P<city_id>7)/$', views.city_info),
+	url(r'^(?P<city_id>8)/$', views.city_info),
+	url(r'^(?P<city_id>9)/$', views.city_info),
+	####################################
 
     url(r'^(?P<city_name>Sydney)/$', views.city_map, name='sydney'),
    
