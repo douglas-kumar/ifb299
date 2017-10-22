@@ -150,3 +150,23 @@ class CityView(generic.ListView):
 ##            raise Http404("City does not exist")
 ##        return render(request, template_name, {'city': city})
 
+def Search(request):
+    template_name = 'Website/search.html'
+    
+    if request.method == 'GET':
+        form = SearchForm(request.GET)
+        if form.is_valid():
+        
+            search_name = form.cleaned_data['search_name']
+            info_type = form.cleaned_data['info_type']
+
+            if info_type == '9':
+                search = LocationInfo.objects.filter(name=search_name)
+            else:
+                search = LocationInfo.objects.filter(name=search_name).filter(infoType=info_type)
+        else:
+            return render(request, template_name)
+        
+    return render(request, template_name, {'search': search})
+
+
