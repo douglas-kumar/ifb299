@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.generic import View
 from django.views import generic
-from .forms import UserForm, LoginForm
+from .forms import UserForm, LoginForm, SearchForm
 
 
 
