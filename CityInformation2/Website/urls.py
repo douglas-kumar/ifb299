@@ -22,23 +22,19 @@ urlpatterns = [
 
     # /Website/Brisbane
 	
-	# Reading in values of foreign key - ADD MORE VALUES
-	#Url for these are: /Website/X --> Where X is the id number 
-	url(r'^(?P<city_id>1)/$', views.city_info), # doesn't work
-	url(r'^(?P<city_id>2)/$', views.city_info),
-	url(r'^(?P<city_id>3)/$', views.city_info),
-	url(r'^(?P<city_id>4)/$', views.city_info),
-	url(r'^(?P<city_id>5)/$', views.city_info),
-    url(r'^(?P<city_id>6)/$', views.city_info),
-	url(r'^(?P<city_id>7)/$', views.city_info),
-	url(r'^(?P<city_id>8)/$', views.city_info),
-	url(r'^(?P<city_id>9)/$', views.city_info),
-	####################################
+    # Reading in values of foreign key - ADD MORE VALUES
+    # Url for these are: /Website/X/ --> Where X is the id number 
+    url(r'^(?P<city_id>1)/$', views.city_info, name='brisbane'),
+    url(r'^(?P<city_id>2)/$', views.city_info, name='sydney'),
+    url(r'^(?P<city_id>3)/$', views.city_info, name='melbourne'),
+    url(r'^(?P<city_id>4)/$', views.city_info, name='canberra'),
+    url(r'^(?P<city_id>5)/$', views.city_info, name='adelaide'),
+    url(r'^(?P<city_id>6)/$', views.city_info, name='darwin'),
+    url(r'^(?P<city_id>7)/$', views.city_info, name='hobart'),
+    url(r'^(?P<city_id>8)/$', views.city_info, name='perth'),
 
-    url(r'^(?P<city_name>Sydney)/$', views.city_map, name='sydney'),
-   
     # /website/Sydney
-    #url(r'^(?P<city_name>Sydney)/$', views.city_map, name='sydney'),
+    url(r'^(?P<city_name>Sydney)/$', views.city_map, name='sydney'),
 
     # /website/Melbourne
     url(r'^(?P<city_name>Melbourne)/$', views.city_map, name='melbourne'),

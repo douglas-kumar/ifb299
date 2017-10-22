@@ -13,7 +13,7 @@ from .forms import UserForm, LoginForm, SearchForm
 
 class IndexView(generic.ListView):
     #template should be 'Website/index.html'
-    template_name = 'Website/index.html' #INDEX NEEDS TO BE CHANGED
+    template_name = 'Website/index.html'
     context_object_name = 'facility_list'
     queryset = LocationInfo.objects.all()
     #context_object_name = 'stuff_list'
@@ -46,6 +46,8 @@ class DetailView(generic.DetailView):
     model = LocationInfo
     template_name = 'Website/detail.html'
 
+########## Need to combine these two functions ##############
+
 # process Brisbane info and city map in html 
 def city_map(request, city_name):
     try:
@@ -54,14 +56,15 @@ def city_map(request, city_name):
         raise Http404("City does not exist")
     return render(request, 'Website/city.html', {'city': city})
 
-# was testing to see if this reads it into the html??? Maybe I'm wrong
+# read all info related to the city
 def city_info(request, city_id):
     try:
-        location_info = LocationInfo.objects.get(city=city_id)
-    except:
+        location_info = LocationInfo.objects.filter(city=city_id)
+    except LocationInfo.DoesNotExist:
         raise Http404("Item not found")
     return render(request, 'Website/city.html', {'location_info': location_info})
-#########################################################################
+
+################################################################
 
 class UserFormView(View):
     form_class = UserForm
