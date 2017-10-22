@@ -1,0 +1,16 @@
+{% extends 'Website/base.html' %}
+{% block body %}
+
+	{% if search %}
+		{% for item in search %}
+			<h2>{{ item.name }}</h2>
+			<h4>{{ item.address }}</h4>
+			<!-- View Details -->
+			<a href="{% url 'Website:detail' item.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+	{% else %}
+		<b> No matches found!</b>
+	
+	{% endif %}
+	
+{% endblock %}
