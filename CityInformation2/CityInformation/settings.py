@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fav',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,7 @@ STATIC_URL = '/static/'
 
 # Actually loads static files
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'statics')]
+
+POSITIVE_NOTATION = "Favorite"
+
+NEGATIVE_NOTATION = "Unfavorite"
