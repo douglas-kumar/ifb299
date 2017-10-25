@@ -162,11 +162,12 @@ def Search(request):
         
             search_name = form.cleaned_data['search_name']
             info_type = form.cleaned_data['info_type']
+            sorting_options = form.cleaned_data['sorting_options']
 
             if info_type == '9':
-                search = LocationInfo.objects.filter(name=search_name)
+                search = LocationInfo.objects.filter(name=search_name).order_by(sorting_options)
             else:
-                search = LocationInfo.objects.filter(name=search_name).filter(infoType=info_type)
+                search = LocationInfo.objects.filter(name=search_name).filter(infoType=info_type).order_by(sorting_options)
         else:
             search = LocationInfo.objects.all()
             match = 1

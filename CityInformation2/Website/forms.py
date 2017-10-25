@@ -28,7 +28,13 @@ class UserForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput)
     password = forms.CharField(widget=forms.PasswordInput)
-    
+
+SORTING_OPTIONS = {
+    ('name','Name Ascending'),
+    ('-name','Name Descending'),
+}
+
 class SearchForm(forms.Form):
     search_name = forms.CharField(widget=forms.TextInput)
     info_type = forms.ChoiceField(choices=INFO_TYPES, required=True)
+    sorting_options = forms.CharField(widget=forms.RadioSelect(choices=SORTING_OPTIONS))

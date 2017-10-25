@@ -219,3 +219,9 @@ class MainView(TestCase):
         userdj_pk = userdj.pk
         userprofile = Profile.objects.get(user_id=userdj_pk)
         self.assertTrue(self.account_type, userprofile.user_type)
+
+
+# Story No: 19 - Sorting Items (Will)
+class SortingItems(TestCase):
+    def test_method(self):
+        pass

@@ -5,30 +5,12 @@
 	<h1> No matches found!</h1>
 	{% endif %}
 	{% if search %}
-		<script>
-			function sortAsc() {
-				search.order_by('name');
-			}
-		</script>
-		<script>
-			function sortDesc() {
-				search.order_by ('-name');
-			}
-		</script>
-
 		{% for item in search %}
 			<h2>{{ item.name }}</h2>
 			<h4>{{ item.address }}</h4>
 			<!-- View Details -->
 			<a href="{% url 'Website:detail' item.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
 		{% endfor %}
-
-		<br><br>
-		<div>
-			<button onclick="sortAsc()" class="btn btn-default btn-sm" role="button">Sort By Name Asc</button>
-			<button onclick="sortDesc()" class="btn btn-default btn-sm" role="button">Sort By Name Desc</button>
-		</div>
-
 	{% else %}
 		
 	
