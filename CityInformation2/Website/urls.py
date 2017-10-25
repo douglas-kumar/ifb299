@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^search/$', views.Search, name='search'),
 
     # /Website/712/
-    # url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
 
     url(r'^(?P<city_name>Brisbane)/$', views.city_map, name='brisbane'),
 
