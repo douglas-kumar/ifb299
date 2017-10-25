@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.template import loader
 from .models import *
-from django.shortcuts import render, redirect
+from django.shortcuts import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.generic import View
@@ -12,19 +12,9 @@ from .forms import UserForm, LoginForm, SearchForm
 
 
 class IndexView(generic.ListView):
-    #template should be 'Website/index.html'
     template_name = 'Website/index.html'
     context_object_name = 'facility_list'
     queryset = LocationInfo.objects.all()
-    #context_object_name = 'stuff_list'
-    #queryset = LocationInfo.objects.all()
-
-##    def city_map(request, city_name):
-##        try:
-##            city = City.objects.get(name=city_name)
-##        except City.DoesNotExist:
-##            raise Http404("City does not exist")
-##        return render(request, 'Website/city.html', {'city': city})
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -32,37 +22,18 @@ class IndexView(generic.ListView):
                                                               city__name__contains="Brisbane")
         return context
 
-
-#     queryset = Library.objects.all()
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(IndexView, self).get_context_data(**kwargs)
-#         context['college_list'] = College.objects.all()
-#         context['mall_list'] = Mall.objects.all()
-#         context['hotel_list'] = Hotel.objects.all()
-#         return context
-
 class DetailView(generic.DetailView):
     model = LocationInfo
     template_name = 'Website/detail.html'
 
-########## Need to combine these two functions ##############
-
-# process Brisbane info and city map in html 
-def city_map(request, city_name):
-    try:
+def city_page(request, city_name):
         city = City.objects.get(name=city_name)
-    except City.DoesNotExist:
-        raise Http404("City does not exist")
-    return render(request, 'Website/city.html', {'city': city})
-
-# read all info related to the city
-def city_info(request, city_id):
-    try:
-        location_info = LocationInfo.objects.filter(city=city_id)
-    except LocationInfo.DoesNotExist:
-        raise Http404("Item not found")
-    return render(request, 'Website/city.html', {'location_info': location_info})
+        location_info = LocationInfo.objects.filter(city=city.id)
+        context = {
+            'city' : city,
+            'location_info' : location_info,
+        }
+        return render_to_response('Website/city.html', context)
 
 ################################################################
 
@@ -138,20 +109,28 @@ def LogOut(request):
 
 class CityView(generic.ListView):
     template_name = 'Website/city.html'
-    context_object_name = 'facility_list'
+    context_object_name = 'info_list'
     queryset = LocationInfo.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super(CityView, self).get_context_data(**kwargs)
-        context['college_list'] = LocationInfo.objects.all()
+        context['city_info_list'] = LocationInfo.objects.all()
         return context
 
-##    def city_map(request, city_name):
-##        try:
-##            city = City.objects.get(name=city_name)
-##        except City.DoesNotExist:
-##            raise Http404("City does not exist")
-##        return render(request, template_name, {'city': city})
+    def city_map(request, city_name):
+        try:
+            city = City.objects.get(name=city_name)
+        except City.DoesNotExist:
+            raise Http404("City does not exist")
+        return render(request, 'Website/city.html', {'city': city})
+
+    # read all info related to the city
+    def city_info(request, city_id):
+        try:
+            location_info = LocationInfo.objects.filter(city=city_id)
+        except LocationInfo.DoesNotExist:
+            raise Http404("Item not found")
+        return render(request, 'Website/city.html', {'location_info': location_info})
 
 def Search(request):
     template_name = 'Website/search.html'
