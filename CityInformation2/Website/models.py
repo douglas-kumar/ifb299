@@ -5,6 +5,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import inspect
 from enum import Enum
+from django.contrib.contenttypes.fields import GenericRelation
+#from fav.models import Favorite
+
 
 # Models for DB migration
 class City(models.Model):
@@ -65,6 +68,7 @@ class LocationInfo(models.Model):
     industryType = models.CharField(max_length=500, null=True, blank=True)
     departments = models.CharField(max_length=500, null=True, blank=True)
     infoType = models.CharField(max_length=1, choices=InfoTypes.choices(), null=True)
+    #favorites = GenericRelation(Favorite)
 
     def __str__(self):
         return self.name + ' - ' + self.address
@@ -109,3 +113,4 @@ DEFAULT_CHOICES = (
 ##    @receiver(post_save, sender=User)
 ##    def save_review(sender, instance, **kwargs):
 ##        instance.review.save()
+
