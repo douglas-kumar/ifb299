@@ -7,7 +7,7 @@ urlpatterns = [
     # /Website/
     url(r'^$', views.IndexView.as_view(), name='index'),
 
-    #url(r'^fav/', include('fav.urls')),
+    url(r'^fav/', include('fav.urls')),
 
     url(r'^register/$', views.UserFormView.as_view(), name='register'),
 

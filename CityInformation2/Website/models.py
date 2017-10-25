@@ -6,7 +6,7 @@ from django.dispatch import receiver
 import inspect
 from enum import Enum
 from django.contrib.contenttypes.fields import GenericRelation
-#from fav.models import Favorite
+from fav.models import Favorite
 
 
 # Models for DB migration
@@ -68,7 +68,7 @@ class LocationInfo(models.Model):
     industryType = models.CharField(max_length=500, null=True, blank=True)
     departments = models.CharField(max_length=500, null=True, blank=True)
     infoType = models.CharField(max_length=1, choices=InfoTypes.choices(), null=True)
-    #favorites = GenericRelation(Favorite)
+    favorites = GenericRelation(Favorite)
 
     def __str__(self):
         return self.name + ' - ' + self.address
