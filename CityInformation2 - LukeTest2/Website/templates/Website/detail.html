@@ -1,0 +1,25 @@
+{%  extends 'Website/base.html' %}
+{% block body %}
+
+{{ locationinfo }}
+{% load favorite_tags %}  <!-- Loading the template tag -->
+
+<!-- authentication is required for users to use our functionality, however there's an implemented tag for unauthenticated users -->
+{% if user.is_authenticated %}
+	{%  get_fav locationinfo user %}  <!-- for authenticated users -->
+
+{% else %}
+	{% get_fav_nouser locationinfo request %} <!-- for unauthenticated users -->
+{% endif %}
+
+{% get_fav_count locationinfo %}  <!-- Include the number of people 'favorited' a certain object -->
+
+{% load static %}
+<script src="{% static 'js/fav.js' %}">
+</script>
+{%  endblock %}
+
+
+
+
+

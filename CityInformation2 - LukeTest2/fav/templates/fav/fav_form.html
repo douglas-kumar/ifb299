@@ -1,0 +1,22 @@
+{% load favorite_tags %}
+
+	<form  method="" action="" class="fav-form{{target.id}}">     
+		{% csrf_token %}
+		{{ form.errors }}
+		<br>
+		{% if target %}	
+			<input name="model" value="{% get_model_name target %}" hidden>
+			<input name="model_id" value="{{ target.id }}" hidden>
+			<input name="app_name" value="{% get_app_name target %}" hidden>
+		{% endif %}
+		{% if user.is_authenticated %}
+		<input id="id_user" name="user" value="{% if user.is_authenticated %}{{ user.id }}{% endif %}" hidden>
+		{% else %}
+		<input id="id_cookie" name="cookie" value="{{cookie}}" hidden>
+		{% endif %}
+		<input  id="fav-button{{target.id}}" type="button" object="{{target.id}}" value="{{fav_value}}" class="fav-button"/>
+	</form>
+	<input name="positive_notation" value="{{positive_notation}}" hidden>
+	<input name="negative_notation" value="{{negative_notation}}" hidden>
+</body>
+</html>
