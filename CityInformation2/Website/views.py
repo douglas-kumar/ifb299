@@ -19,8 +19,9 @@ class IndexView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
+        order = self.request.GET.get('sort', 'name')
         context['college_list'] = LocationInfo.objects.filter(infoType=InfoTypes.College.value,
-                                                              city__name__contains="Brisbane")
+                                                              city__name__contains="Brisbane").order_by(order)
         return context
 
 class DetailView(generic.DetailView):

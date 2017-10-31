@@ -21,6 +21,11 @@
 	{% if user.profile.user_type == 'STUDENT' %}
 		<div class="col-sm-12">
 			<h3>Here are all the colleges</h3>
+
+			<a href="{{ '' }}?sort=name" class="btn btn-default btn-sm" role="button">Sort By Name Ascending</a>
+			<a href="{{ '' }}?sort=-name" class="btn btn-default btn-sm" role="button">Sort By Name Descending</a>
+			<a href="{{ '' }}?sort=pk" class="btn btn-default btn-sm" role="button">Sort By Oldest Added</a>
+			<a href="{{ '' }}?sort=-pk" class="btn btn-default btn-sm" role="button">Sort By Newest Added</a>
 		</div>
 	{% endif %}
 		{% if user.profile.user_type == 'STUDENT' %}
@@ -37,30 +42,9 @@
 
 							<!-- View Details -->
 							<a href="{% url 'Website:detail' college.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
-
-							<!-- Edit College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-cog"></span>
-							</a>
-
-							<!-- Delete College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-trash"></span>
-							</a>
 						</div>
 					</div>
 				{% endfor %}
-
-			{% else %}
-            <div class="col-sm-12">
-                <br>
-                <a href="#">
-                    <button type="button" class="btn btn-success">
-                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Album
-                    </button>
-                </a>
-            </div>
-	
         {% endif %}
 	{% endif %}	
 	</div>
@@ -71,6 +55,10 @@
 	{% if user.profile.user_type == 'TOURIST' %}
 	<div class="col-sm-12">
 		<h3>Here are all the Malls</h3>
+		<a href="{{ '' }}?sort=name" class="btn btn-default btn-sm" role="button">Sort By Name Ascending</a>
+		<a href="{{ '' }}?sort=-name" class="btn btn-default btn-sm" role="button">Sort By Name Descending</a>
+		<a href="{{ '' }}?sort=pk" class="btn btn-default btn-sm" role="button">Sort By Oldest Added</a>
+		<a href="{{ '' }}?sort=-pk" class="btn btn-default btn-sm" role="button">Sort By Newest Added</a>
 	</div>
 	{% endif %}	
 		{% if user.profile.user_type == 'TOURIST' %}
@@ -87,29 +75,9 @@
 
 							<!-- View Details -->
 							<a href="" class="btn btn-primary btn-sm" role="button">View Details</a>
-
-							<!-- Edit College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-cog"></span>
-							</a>
-
-							<!-- Delete College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-trash"></span>
-							</a>
 						</div>
 					</div>
 				{% endfor %}
-
-			{% else %}
-				<div class="col-sm-12">
-					<br>
-					<a href="#">
-						<button type="button" class="btn btn-success">
-							<span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Album
-						</button>
-					</a>
-				</div>
 			{% endif %}
 		{% endif %}		
     </div>
@@ -119,6 +87,11 @@
 	{% if user.profile.user_type == 'BUSINESS' %}
 		<div class="col-sm-12">
 			<h3>Here are all the Hotels</h3>
+
+			<a href="{{ '' }}?sort=name" class="btn btn-default btn-sm" role="button">Sort By Name Ascending</a>
+			<a href="{{ '' }}?sort=-name" class="btn btn-default btn-sm" role="button">Sort By Name Descending</a>
+			<a href="{{ '' }}?sort=pk" class="btn btn-default btn-sm" role="button">Sort By Oldest Added</a>
+			<a href="{{ '' }}?sort=-pk" class="btn btn-default btn-sm" role="button">Sort By Newest Added</a>
 		</div>
 	{% endif %}
 		{% if user.profile.user_type == 'BUSINESS' %}
@@ -135,32 +108,62 @@
 
 							<!-- View Details -->
 							<a href="" class="btn btn-primary btn-sm" role="button">View Details</a>
-
-							<!-- Edit College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-cog"></span>
-							</a>
-
-							<!-- Delete College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-trash"></span>
-							</a>
 						</div>
 					</div>
 				{% endfor %}
+			{% endif %}
+		{% endif %}		
+    </div>
 
-			{% else %}
+	<!-- ADMIN CONTROLS -->
+	{% if user.profile.user_type != 'STUDENT' %}
+		{% if user.profile.user_type != 'TOURIST'%}
+			{% if user.profile.user_type != 'BUSINESS' %}
+				<div class="col-sm-12">
+					<h3>Here are all the colleges</h3>
+					<a href="{{ '' }}?sort=name" class="btn btn-default btn-sm" role="button">Sort By Name Ascending</a>
+					<a href="{{ '' }}?sort=-name" class="btn btn-default btn-sm" role="button">Sort By Name Descending</a>
+					<a href="{{ '' }}?sort=pk" class="btn btn-default btn-sm" role="button">Sort By Oldest Added</a>
+					<a href="{{ '' }}?sort=-pk" class="btn btn-default btn-sm" role="button">Sort By Newest Added</a>
+				</div>
 				<div class="col-sm-12">
 					<br>
 					<a href="#">
 						<button type="button" class="btn btn-success">
-							<span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Album
+							<span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Item
 						</button>
 					</a>
 				</div>
+				{% if college_list %}
+					{% for college in college_list %}
+
+						<div class="col-sm-4 col-lg-2">
+							<a href="{% url 'Website:detail' college.id %}">
+								<img src="{{ college.image }}" class="img-responsive" style="width:200px;height:200px">
+							</a>
+							<div class="caption">
+								<h2>{{ college.name }}</h2>
+								<h4>{{ college.address }}</h4>
+
+								<!-- View Details -->
+								<a href="{% url 'Website:detail' college.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+								<!-- Edit Album -->
+								<a href="#" class="btn btn-default btn-sm">
+									<span class="glyphicon glyphicon-cog"></span>
+								</a>
+
+								<!-- Delete Album -->
+								<a href="#" class="btn btn-default btn-sm">
+									<span class="glyphicon glyphicon-trash"></span>
+								</a>
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
 			{% endif %}
-		{% endif %}		
-    </div>
+		{% endif %}
+	{% endif %}
 </div>
 
 {%  endblock %}

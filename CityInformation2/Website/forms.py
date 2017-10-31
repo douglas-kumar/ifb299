@@ -40,6 +40,8 @@ class LoginForm(forms.Form):
 SORTING_OPTIONS = {
     ('name','Name Ascending'),
     ('-name','Name Descending'),
+    ('pk', 'Oldest Added'),
+    ('-pk', 'Newest Added'),
 }
 
 class SearchForm(forms.Form):
