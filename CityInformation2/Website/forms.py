@@ -12,6 +12,14 @@ INFO_TYPES = [
     ('9', 'All'),
 ]
 
+RATINGS = [
+    ('5', '5'),
+    ('4', '4'),
+    ('3', '3'),
+    ('2', '2'),
+    ('1', '1'),
+]
+
 
 # extend User table to include the user's type
 class UserForm(forms.ModelForm):
@@ -38,3 +46,7 @@ class SearchForm(forms.Form):
     search_name = forms.CharField(widget=forms.TextInput)
     info_type = forms.ChoiceField(choices=INFO_TYPES, required=True)
     sorting_options = forms.CharField(widget=forms.RadioSelect(choices=SORTING_OPTIONS))
+
+class ReviewForm(forms.Form):
+    rating = forms.ChoiceField(choices=RATINGS, required=True)
+    text = forms.CharField(widget=forms.TextInput)

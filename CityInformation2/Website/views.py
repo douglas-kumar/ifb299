@@ -7,7 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.generic import View
 from django.views import generic
-from .forms import UserForm, LoginForm, SearchForm
+from .forms import *
+import re
 
 
 
@@ -24,7 +25,42 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = LocationInfo
+    form_class = ReviewForm
     template_name = 'Website/detail.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(None)
+        number = re.sub("[^0-9]", "", request.path)
+        place_id = int(number)
+        location_info = self.model.objects.get(pk=place_id)
+        reviews = Review.objects.filter(place=location_info)
+        context = {
+            'locationinfo' : location_info,
+            'review' : reviews,
+            'form' : form,
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        
+        if (form.is_valid()):
+            number = re.sub("[^0-9]", "", request.path)
+            place_id = int(number)
+            rating = form.cleaned_data['rating']
+            text = form.cleaned_data['text']
+
+            user = Profile.objects.get(user_id=request.user)
+            place = LocationInfo.objects.get(pk=place_id)
+            review = Review.create(user, place, rating, text)
+            review.save()
+            reviews = Review.objects.filter(place=place)
+            context = {
+                'form' : form,
+                'locationinfo': place,
+                'review' : reviews,
+            }
+            return render(request, self.template_name, context)
 
 def city_page(request, city_name):
         city = City.objects.get(name=city_name)
@@ -152,3 +188,71 @@ def Search(request):
         
     return render(request, template_name, {'search': search})
 
+def review(request):
+    template_name = 'Website/detail.html'
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+
+            user = Profile.objects.get(user_id=request.user)
+            number = re.sub("[^0-9]", "", request.path)
+            # place_id = int(number)
+            place = LocationInfo.objects.get(pk=1)
+            rating = form.cleaned_data['rating']
+            text = form.cleaned_data['text']
+
+            review = Review.create(user, place, rating, text)
+            review.save()
+            reviews = Review.objects.filter(place=place)
+            context = {
+                'form' : form,
+                'locationinfo': place,
+                'review' : reviews,
+                'user' : user,
+            }
+
+        return render(request, template_name, context)
+
+class ReviewFormView(View):
+    model = LocationInfo
+    form_class = ReviewForm
+    template_name = 'Website/detail.html'
+
+    def get(self, request, *args, **kwargs):
+        user = Profile.objects.get(user_id=request.user)
+        number = re.sub("[^0-9]", "", request.path)
+        place_id = int(number)
+        form = self.form_class(None)
+        location_info = self.model.objects.get(pk=place_id)
+        reviews = Review.objects.filter(place=location_info)
+        context = {
+            'location_info' : location_info,
+            'form' : form,
+            'review' : reviews,
+            'user' : user,
+        }
+        return render(request, self.template_name, context)
+ 
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+
+        if (form.is_valid()) and (request.user.is_authenticated()):
+
+            number = re.sub("[^0-9]", "", request.path)
+            place_id = int(number)
+            rating = form.cleaned_data['rating']
+            text = form.cleaned_data['text']
+
+            user = Profile.objects.get(user_id=request.user)
+            place = LocationInfo.objects.get(pk=place_id)
+            review = Review.create(user, place, rating, text)
+            review.save()
+            reviews = Review.objects.filter(place=place)
+            context = {
+                'form' : form,
+                'location_info': place,
+                'review' : reviews,
+                'user' : user,
+            }
+            return render(request, self.template_name, context)
