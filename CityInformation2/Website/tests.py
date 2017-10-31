@@ -1,8 +1,6 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
-from .models import College
-from .models import Profile
-from Website.models import City
+from .models import *
 from .urls import *
 from django.db import IntegrityError
 from django.urls import reverse, resolve
@@ -10,7 +8,7 @@ from django.urls import reverse, resolve
 # To Run tests:
 # python manage.py test Website.tests
 
-# Story: S03 - Log In
+# Story No: 3 - Log In
 class CreateUserAndLogIn(TestCase):
     username = 'userToLogin'
     email = 'user2login@website.com'
@@ -166,13 +164,13 @@ class LogOut(TestCase):
         client.logout()
 
 # Story No: 7 - Modify City Information (Ruka)
-class ModifyCityInfo(TestCase):
-    def test_modify(self):
-        College.objects.create(name="Uni", address="Somewhere", departments="Business, Medicine...etc.",
-                               email="imhere@email.com", image="https://image.jpg")
-        College.objects.filter(name="Uni").update(address="Here")
-        temp = College.objects.get(name="Uni")
-        self.assertEqual(temp.address, "Here")
+# class ModifyCityInfo(TestCase):
+#     def test_modify(self):
+#         College.objects.create(name="Uni", address="Somewhere", departments="Business, Medicine...etc.",
+#                                email="imhere@email.com", image="https://image.jpg")
+#         College.objects.filter(name="Uni").update(address="Here")
+#         temp = College.objects.get(name="Uni")
+#         self.assertEqual(temp.address, "Here")
         
 # Story No: 10 - City Map
 class CityMap(TestCase):
@@ -225,3 +223,27 @@ class MainView(TestCase):
 class SortingItems(TestCase):
     def test_method(self):
         pass
+
+
+# Story No: 18 - Reviews
+class Reviews(TestCase):
+    rating = 3
+    text = "This review is a test to see if reviewing items works"
+    username = 'tester'
+    user = User.objects.get_or_create(username=username)
+    place = LocationInfo.objects.get(pk=3)
+    
+    def create_review(self):
+        review = Review.create(user, place, rating, text)
+        self.assertEqual(review.user, self.user)
+        self.assertEqual(review.place, self.place)
+        self.assertEqual(review.rating, self.rating)
+        self.assertEqual(review.text, self.text)
+        review.save()
+
+    def get_review(self):
+        review = Review.objects.get(user=self.user, place=self.place)
+        self.assertEqual(review.rating, self.rating)
+        self.assertEqual(review.text, self.text)
+
+    
