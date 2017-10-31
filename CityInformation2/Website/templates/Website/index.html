@@ -20,7 +20,7 @@
 	<!-- Don't ask my why but it breaks without this -->
 	{% if user.profile.user_type == 'STUDENT' %}
 		<div class="col-sm-12">
-			<h3>Here are all the colleges</h3>
+			<h3>Here are all the colleges in your city!</h3>
 		</div>
 	{% endif %}
 		{% if user.profile.user_type == 'STUDENT' %}
@@ -105,9 +105,6 @@
 				<div class="col-sm-12">
 					<br>
 					<a href="#">
-						<button type="button" class="btn btn-success">
-							<span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Album
-						</button>
 					</a>
 				</div>
 			{% endif %}
@@ -118,7 +115,7 @@
 	<!-- Don't ask my why but it breaks without this -->
 	{% if user.profile.user_type == 'BUSINESS' %}
 		<div class="col-sm-12">
-			<h3>Here are all the Hotels</h3>
+			<h3>Here are all the Hotels in your city!</h3>
 		</div>
 	{% endif %}
 		{% if user.profile.user_type == 'BUSINESS' %}
@@ -153,14 +150,14 @@
 				<div class="col-sm-12">
 					<br>
 					<a href="#">
-						<button type="button" class="btn btn-success">
-							<span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Album
-						</button>
 					</a>
 				</div>
 			{% endif %}
 		{% endif %}		
     </div>
+	{% if user.profile.user_type == false %}
+	<h1>Please login in to view city information</h1>
+	{% endif %}
 </div>
 
 {%  endblock %}
