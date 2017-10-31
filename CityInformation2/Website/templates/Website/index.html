@@ -21,6 +21,11 @@
 	{% if user.profile.user_type == 'STUDENT' %}
 		<div class="col-sm-12">
 			<h3>Here are all the colleges in your city!</h3>
+
+			<a href="{{ '' }}?sort=name" class="btn btn-default btn-sm" role="button">Sort By Name Ascending</a>
+			<a href="{{ '' }}?sort=-name" class="btn btn-default btn-sm" role="button">Sort By Name Descending</a>
+			<a href="{{ '' }}?sort=pk" class="btn btn-default btn-sm" role="button">Sort By Oldest Added</a>
+			<a href="{{ '' }}?sort=-pk" class="btn btn-default btn-sm" role="button">Sort By Newest Added</a>
 		</div>
 	{% endif %}
 		{% if user.profile.user_type == 'STUDENT' %}
@@ -37,30 +42,9 @@
 
 							<!-- View Details -->
 							<a href="{% url 'Website:detail' college.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
-
-							<!-- Edit College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-cog"></span>
-							</a>
-
-							<!-- Delete College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-trash"></span>
-							</a>
 						</div>
 					</div>
 				{% endfor %}
-
-			{% else %}
-            <div class="col-sm-12">
-                <br>
-                <a href="#">
-                    <button type="button" class="btn btn-success">
-                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Album
-                    </button>
-                </a>
-            </div>
-	
         {% endif %}
 	{% endif %}	
 	</div>
@@ -71,6 +55,10 @@
 	{% if user.profile.user_type == 'TOURIST' %}
 	<div class="col-sm-12">
 		<h3>Here are all the Malls</h3>
+		<a href="{{ '' }}?sort=name" class="btn btn-default btn-sm" role="button">Sort By Name Ascending</a>
+		<a href="{{ '' }}?sort=-name" class="btn btn-default btn-sm" role="button">Sort By Name Descending</a>
+		<a href="{{ '' }}?sort=pk" class="btn btn-default btn-sm" role="button">Sort By Oldest Added</a>
+		<a href="{{ '' }}?sort=-pk" class="btn btn-default btn-sm" role="button">Sort By Newest Added</a>
 	</div>
 	{% endif %}	
 		{% if user.profile.user_type == 'TOURIST' %}
@@ -87,26 +75,9 @@
 
 							<!-- View Details -->
 							<a href="" class="btn btn-primary btn-sm" role="button">View Details</a>
-
-							<!-- Edit College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-cog"></span>
-							</a>
-
-							<!-- Delete College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-trash"></span>
-							</a>
 						</div>
 					</div>
 				{% endfor %}
-
-			{% else %}
-				<div class="col-sm-12">
-					<br>
-					<a href="#">
-					</a>
-				</div>
 			{% endif %}
 		{% endif %}		
     </div>
@@ -116,6 +87,11 @@
 	{% if user.profile.user_type == 'BUSINESS' %}
 		<div class="col-sm-12">
 			<h3>Here are all the Hotels in your city!</h3>
+
+			<a href="{{ '' }}?sort=name" class="btn btn-default btn-sm" role="button">Sort By Name Ascending</a>
+			<a href="{{ '' }}?sort=-name" class="btn btn-default btn-sm" role="button">Sort By Name Descending</a>
+			<a href="{{ '' }}?sort=pk" class="btn btn-default btn-sm" role="button">Sort By Oldest Added</a>
+			<a href="{{ '' }}?sort=-pk" class="btn btn-default btn-sm" role="button">Sort By Newest Added</a>
 		</div>
 	{% endif %}
 		{% if user.profile.user_type == 'BUSINESS' %}
@@ -132,31 +108,16 @@
 
 							<!-- View Details -->
 							<a href="" class="btn btn-primary btn-sm" role="button">View Details</a>
-
-							<!-- Edit College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-cog"></span>
-							</a>
-
-							<!-- Delete College -->
-							<a href="#" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-trash"></span>
-							</a>
 						</div>
 					</div>
 				{% endfor %}
-
-			{% else %}
-				<div class="col-sm-12">
-					<br>
-					<a href="#">
-					</a>
-				</div>
 			{% endif %}
 		{% endif %}		
     </div>
+
+	<!-- Not Logged In -->
 	{% if user.profile.user_type == false %}
-	<h1>Please login in to view city information</h1>
+	<h3>Please log in to view city information</3>
 	{% endif %}
 </div>
 
