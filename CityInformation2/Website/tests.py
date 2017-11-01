@@ -1,7 +1,6 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from .models import *
-from Website.models import City
 from .urls import *
 from django.db import IntegrityError
 from django.urls import reverse, resolve
@@ -251,7 +250,20 @@ class Reviews(TestCase):
     
 #Stroy No: 08 - Multiple Cities (Calum)
 class MultipleCities(TestCase):
-    city = 'Brisbane'
+    model = City
+    brisbane = City.objects.get(pk=1)
+    sydney = City.objects.get(pk=2)
+    cities = [
+        'Brisbane',
+        'Sydney',
+        'Melbourne',
+        'Canberra',
+        'Perth',
+        'Darwin',
+        'Adelaide'
+    ]
     
-    def test_XXXX(self):
-        pass
+    def test_cities_exist(self):
+        self.assertIsNotNone(self.brisbane)
+        self.assertIsNotNone(self.sydney)
+        # Continue

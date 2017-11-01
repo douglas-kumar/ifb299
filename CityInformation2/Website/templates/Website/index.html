@@ -1,7 +1,7 @@
 {% extends 'Website/base.html' %}
 
 {% block body %}
-<h1>{{city.name}}</h1>
+<!-- <h1>{{city.name}}</h1>
 <div id="map" style="width:100%;height:400px;"></div>
 	<script>
 		function myMap() {
@@ -15,7 +15,7 @@
 	</script>
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmjFijuozw5beUzVgLy9HtfrbgTCR1K6I&callback=myMap"></script>
-<div>
+<div> -->
 	<div class="row">
 	<!-- Don't ask my why but it breaks without this -->
 	{% if user.profile.user_type == 'STUDENT' %}
@@ -45,7 +45,8 @@
 						</div>
 					</div>
 				{% endfor %}
-        {% endif %}
+        {% endif %}<br/>
+		<h4>Click on a city to view more information about it</h4>
 	{% endif %}	
 	</div>
 	
@@ -74,26 +75,28 @@
 							<h4>{{ mall.address }}</h4>
 
 							<!-- View Details -->
-							<a href="" class="btn btn-primary btn-sm" role="button">View Details</a>
+							<a href="{% url 'Website:detail' mall.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
 						</div>
 					</div>
 				{% endfor %}
 			{% endif %}
-		{% endif %}		
-    </div>
+			<br/>
+		<h4>Click on a city to view more information about it</h4>
+		{% endif %}
+			</div>
 
 	<div class="row">
 	<!-- Don't ask my why but it breaks without this -->
+		<!-- Don't ask my why but it breaks without this -->
 	{% if user.profile.user_type == 'BUSINESS' %}
-		<div class="col-sm-12">
-			<h3>Here are all the Hotels in your city!</h3>
-
-			<a href="{{ '' }}?sort=name" class="btn btn-default btn-sm" role="button">Sort By Name Ascending</a>
-			<a href="{{ '' }}?sort=-name" class="btn btn-default btn-sm" role="button">Sort By Name Descending</a>
-			<a href="{{ '' }}?sort=pk" class="btn btn-default btn-sm" role="button">Sort By Oldest Added</a>
-			<a href="{{ '' }}?sort=-pk" class="btn btn-default btn-sm" role="button">Sort By Newest Added</a>
-		</div>
-	{% endif %}
+	<div class="col-sm-12">
+		<h3>Here are all the Hotels in your city!</h3>
+		<a href="{{ '' }}?sort=name" class="btn btn-default btn-sm" role="button">Sort By Name Ascending</a>
+		<a href="{{ '' }}?sort=-name" class="btn btn-default btn-sm" role="button">Sort By Name Descending</a>
+		<a href="{{ '' }}?sort=pk" class="btn btn-default btn-sm" role="button">Sort By Oldest Added</a>
+		<a href="{{ '' }}?sort=-pk" class="btn btn-default btn-sm" role="button">Sort By Newest Added</a>
+	</div>
+	{% endif %}	
 		{% if user.profile.user_type == 'BUSINESS' %}
 			{% if hotel_list %}
 				{% for hotel in hotel_list %}
@@ -107,19 +110,20 @@
 							<h4>{{ hotel.address }}</h4>
 
 							<!-- View Details -->
-							<a href="" class="btn btn-primary btn-sm" role="button">View Details</a>
+							<a href="{% url 'Website:detail' hotel.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
 						</div>
 					</div>
 				{% endfor %}
 			{% endif %}
-		{% endif %}		
+			&nbsp;
+		<h4>Click on a city to view more information about it</h4>
+		{% endif %}
     </div>
 
 	<!-- Not Logged In -->
 	{% if user.profile.user_type == false %}
 	<h3>Please log in to view city information</3>
 	{% endif %}
-</div>
 
 {%  endblock %}
 
