@@ -41,10 +41,12 @@ class DetailView(generic.DetailView):
         place_id = int(number)
         location_info = self.model.objects.get(pk=place_id)
         reviews = Review.objects.filter(place=location_info)
+        total = len(reviews)
         context = {
             'locationinfo' : location_info,
             'review' : reviews,
             'form' : form,
+            'total' : total,
         }
         return render(request, self.template_name, context)
 
@@ -62,10 +64,12 @@ class DetailView(generic.DetailView):
             review = Review.create(user, place, rating, text)
             review.save()
             reviews = Review.objects.filter(place=place)
+            total = len(reviews)
             context = {
                 'form' : form,
                 'locationinfo': place,
                 'review' : reviews,
+                'total' : total,
             }
             return render(request, self.template_name, context)
 

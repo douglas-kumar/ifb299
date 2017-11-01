@@ -17,31 +17,39 @@
 	<div class="the-menu">
     <button class="dropbtn" id="welcome-btn">Hello {{ user.username }}!  <img class="menu-icons" src="{% static 'Website/images/happy.png' %}" alt=" happy.png" /></button>
 	{% load static %}
-	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/'">Home <img class="menu-icons" src="{% static 'Website/images/home.png' %}" alt=" home.png" /></button>
+	<button class="dropbtn" onclick="location.href = /Website/'">Home <img class="menu-icons" src="{% static 'Website/images/home.png' %}" alt=" home.png" /></button>
 	<button class="dropbtn" onclick="location.href = '#'">My Favourites  <img class="menu-icons" src="{% static 'Website/images/fav.png' %}" alt=" fav.png" /></button>
 	<button class="dropbtn" onclick="location.href = '#'">My Reviews  <img class="menu-icons" src="{% static 'Website/images/review.png' %}" alt=" review.png" /></button>
 		<div class="dropdown">
 		<button class="dropbtn">City <img class="menu-icons" src="{% static 'Website/images/city.png' %}" alt=" city.png" /></button>
 		<div class="dropdown-content">
-		<a href="http://127.0.0.1:8000/Website/Brisbane/">Brisbane</a>
-		<a href="http://127.0.0.1:8000/Website/Sydney">Sydney</a>
-		<a href="http://127.0.0.1:8000/Website/Melbourne">Melbourne</a>
-		<a href="http://127.0.0.1:8000/Website/Canberra">Canberra</a>
-		<a href="http://127.0.0.1:8000/Website/Perth">Perth</a>
-		<a href="http://127.0.0.1:8000/Website/Adelaide">Adelaide</a>
-		<a href="http://127.0.0.1:8000/Website/Darwin">Darwin</a>
-		<a href="http://127.0.0.1:8000/Website/Hobart">Hobart</a>
+		<a href="/Website/Brisbane/">Brisbane</a>
+		<a href="/Website/Sydney">Sydney</a>
+		<a href="/Website/Melbourne">Melbourne</a>
+		<a href="/Website/Canberra">Canberra</a>
+		<a href="/Website/Perth">Perth</a>
+		<a href="/Website/Adelaide">Adelaide</a>
+		<a href="/Website/Darwin">Darwin</a>
+		<a href="/Website/Hobart">Hobart</a>
 		</div></div>
-					<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/logout'">Logout  <img class="menu-icons" src="{% static 'Website/images/logout.png' %}" alt=" logout.png" /></button>
+					<button class="dropbtn" onclick="location.href = '/Website/logout'">Logout  <img class="menu-icons" src="{% static 'Website/images/logout.png' %}" alt=" logout.png" /></button>
 	<form action='/Website/search/' method="GET">
 		<input type="text" name="search_name">
 		<select name='info_type' required>
 			<option value='9'>All</option>
 			<option value='0'>College</option>
+			<option value="1">Library</option>
+			<option value="2">Industry</option>
+			<option value="3">Hotel</option>
+			<option value="4">Park</option>
+			<option value="5">Zoo</option>
+			<option value="6">Museum</option>
+			<option value="7">Restaurant</option>
+			<option value="8">Mall</option>
 		</select>
 		<input type="submit" value="Search">
 		<label>Sort By: </label>
-		<input type="radio" name="sorting_options" value="name">Name Asc
+		<input type="radio" name="sorting_options" value="name" checked>Name Asc
 		<input type="radio" name="sorting_options" value="-name">Name Desc
 		<input type="radio" name="sorting_options" value="pk">Oldest Added
 		<input type="radio" name="sorting_options" value="-pk">Newest Added
@@ -50,20 +58,20 @@
         {% else %}
 		<div class="the-menu">
 	{% load static %}
-	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/'">Home <img class="menu-icons" src="{% static 'Website/images/home.png' %}" alt=" home.png" /></button>
-	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/login/'">Login <img class="menu-icons" src="{% static 'Website/images/login.png' %}" alt=" login.png" /></button>
-	<button class="dropbtn" onclick="location.href = 'http://127.0.0.1:8000/Website/register/'">Register  <img class="menu-icons" src="{% static 'Website/images/register.png' %}" alt=" register.png" /></button>
+	<button class="dropbtn" onclick="location.href = '/Website/'">Home <img class="menu-icons" src="{% static 'Website/images/home.png' %}" alt=" home.png" /></button>
+	<button class="dropbtn" onclick="location.href = '/Website/login/'">Login <img class="menu-icons" src="{% static 'Website/images/login.png' %}" alt=" login.png" /></button>
+	<button class="dropbtn" onclick="location.href = '/Website/register/'">Register  <img class="menu-icons" src="{% static 'Website/images/register.png' %}" alt=" register.png" /></button>
 	<div class="dropdown">
 		<button class="dropbtn">City <img class="menu-icons" src="{% static 'Website/images/city.png' %}" alt=" city.png" /></button>
 		<div class="dropdown-content">
-		<a href="http://127.0.0.1:8000/Website/Brisbane/">Brisbane</a>
-		<a href="http://127.0.0.1:8000/Website/Sydney">Sydney</a>
-		<a href="http://127.0.0.1:8000/Website/Melbourne">Melbourne</a>
-		<a href="http://127.0.0.1:8000/Website/Canberra">Canberra</a>
-		<a href="http://127.0.0.1:8000/Website/Perth">Perth</a>
-		<a href="http://127.0.0.1:8000/Website/Adelaide">Adelaide</a>
-		<a href="http://127.0.0.1:8000/Website/Darwin">Darwin</a>
-		<a href="http://127.0.0.1:8000/Website/Hobart">Hobart</a>
+		<a href="/Website/Brisbane/">Brisbane</a>
+		<a href="/Website/Sydney">Sydney</a>
+		<a href="/Website/Melbourne">Melbourne</a>
+		<a href="/Website/Canberra">Canberra</a>
+		<a href="/Website/Perth">Perth</a>
+		<a href="/Website/Adelaide">Adelaide</a>
+		<a href="/Website/Darwin">Darwin</a>
+		<a href="/Website/Hobart">Hobart</a>
 		</div>
 	</div>
 	</div>
