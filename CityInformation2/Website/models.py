@@ -19,23 +19,6 @@ class City(models.Model):
     def __str__(self):
         return self.name + " " + self.state
 
-
-class Event(models.Model):
-    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
-    name = models.CharField(max_length=250)
-    description = models.CharField(max_length=1000)
-
-    def __str__(self):
-        return self.name
-
-class PublicTrans(models.Model):
-    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
-    name = models.CharField(max_length=250)
-    description = models.CharField(max_length=1000)
-
-    def __str__(self):
-        return self.name
-
 class ChoiceEnum(Enum):
     @classmethod
     def choices(cls):
@@ -72,11 +55,7 @@ class LocationInfo(models.Model):
 
     def __str__(self):
         return self.name + ' - ' + self.address
-#When specifying the infoType elsewhere in the code,
-#import StudentTypes and type as follows
-#junior_students = Student.objects.filter(student_type=StudentTypes.College.value)
-
-
+    
 # Extend the User model for user types   
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
