@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from .models import *
+from Website.models import City
 from .urls import *
 from django.db import IntegrityError
 from django.urls import reverse, resolve
@@ -125,22 +126,22 @@ class Menu(TestCase):
         "/Website/Brisbane/"
     ]
 
-    def test_index_page_works(self):
+    def test_index_page_connects(self):
         client = Client()
         response = self.client.get('/Website/')
         self.assertEqual(response.status_code, 200)
 
-    def test_register_page_works(self):
+    def test_register_page_connects(self):
         client = Client()
         response = self.client.get('/Website/register/')
         self.assertEqual(response.status_code, 200)
         
-    def test_logout_page_works(self):
+    def test_logout_page_connects(self):
         client = Client()
         response = self.client.get('/Website/logout/')
         self.assertEqual(response.status_code, 200)
 
-    def test_login_page_works(self):
+    def test_login_page_connects(self):
         client = Client()
         response = self.client.get('/Website/login/')
         self.assertEqual(response.status_code, 200)
@@ -163,14 +164,15 @@ class LogOut(TestCase):
         client = Client()
         client.logout()
 
-# Story No: 7 - Modify City Information (Ruka)
-# class ModifyCityInfo(TestCase):
-#     def test_modify(self):
-#         College.objects.create(name="Uni", address="Somewhere", departments="Business, Medicine...etc.",
-#                                email="imhere@email.com", image="https://image.jpg")
-#         College.objects.filter(name="Uni").update(address="Here")
-#         temp = College.objects.get(name="Uni")
-#         self.assertEqual(temp.address, "Here")
+# Commented out because it was failing tests, needs to be updated to new DB model
+### Story No: 7 - Modify City Information (Ruka)
+##class ModifyCityInfo(TestCase):
+##    def test_modify(self):
+##        College.objects.create(name="Uni", address="Somewhere", departments="Business, Medicine...etc.",
+##                               email="imhere@email.com", image="https://image.jpg")
+##        College.objects.filter(name="Uni").update(address="Here")
+##        temp = College.objects.get(name="Uni")
+##        self.assertEqual(temp.address, "Here")
         
 # Story No: 10 - City Map
 class CityMap(TestCase):
@@ -247,3 +249,9 @@ class Reviews(TestCase):
         self.assertEqual(review.text, self.text)
 
     
+#Stroy No: 08 - Multiple Cities (Calum)
+class MultipleCities(TestCase):
+    city = 'Brisbane'
+    
+    def test_XXXX(self):
+        pass

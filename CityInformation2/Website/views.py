@@ -14,14 +14,20 @@ import re
 
 class IndexView(generic.ListView):
     template_name = 'Website/index.html'
-    context_object_name = 'facility_list'
     queryset = LocationInfo.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        order = self.request.GET.get('sort', 'name')
-        context['college_list'] = LocationInfo.objects.filter(infoType=InfoTypes.College.value,
-                                                              city__name__contains="Brisbane").order_by(order)
+        order = self.request.GET.get('sort', 'pk')
+        context['college_list'] = LocationInfo.objects.filter(
+            infoType=InfoTypes.College.value,
+            city__name__contains="Brisbane").order_by(order)
+        context['hotel_list'] = LocationInfo.objects.filter(
+            infoType=InfoTypes.Hotel.value,
+            city__name__contains="Brisbane").order_by(order)
+        context['mall_list'] = LocationInfo.objects.filter(
+            infoType=InfoTypes.Mall.value,
+            city__name__contains="Brisbane").order_by(order)
         return context
 
 class DetailView(generic.DetailView):
@@ -70,7 +76,7 @@ def city_page(request, city_name):
             'city' : city,
             'location_info' : location_info,
         }
-        return render_to_response('Website/city.html', context)
+        return render(request, 'Website/city.html', context)
 
 class UserFormView(View):
     form_class = UserForm
@@ -109,7 +115,7 @@ class UserFormView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('/Website/Brisbane') #change Brisbane
+                    return redirect('/Website/')
 
         return render(request, self.template_name, {'form': form})
 
@@ -144,29 +150,50 @@ def LogOut(request):
 
 class CityView(generic.ListView):
     template_name = 'Website/city.html'
-    context_object_name = 'info_list'
-    queryset = LocationInfo.objects.all()
+    context_object_name = 'location_info'
+    model = LocationInfo
+    user = Profile
 
+    def get_queryset(self):
+        self.city_name = self.kwargs['city_name']
+        queryset = super(CityView, self).get_queryset()
+        return queryset
+    
     def get_context_data(self, **kwargs):
         context = super(CityView, self).get_context_data(**kwargs)
-        context['city_info_list'] = LocationInfo.objects.all()
+        context['the_city'] = City.objects.get(name=self.city_name)
+        context['city_id'] = self.model.objects.filter(
+            city=context['the_city'].id)
+        context['city_colleges'] = self.model.objects.filter(
+            infoType=InfoTypes.College.value,
+            city__name__contains=self.city_name)
+        context['city_malls'] = self.model.objects.filter(
+            infoType=InfoTypes.Mall.value,
+            city__name__contains=self.city_name)
+        context['city_hotels'] = self.model.objects.filter(
+            infoType=InfoTypes.Hotel.value,
+            city__name__contains=self.city_name)
+        context['city_libraries'] = self.model.objects.filter(
+            infoType=InfoTypes.Library.value,
+            city__name__contains=self.city_name)
+        context['city_industries'] = self.model.objects.filter(
+            infoType=InfoTypes.Indusry.value,
+            city__name__contains=self.city_name)
+        context['city_parks'] = self.model.objects.filter(
+            infoType=InfoTypes.Park.value,
+            city__name__contains=self.city_name)
+        context['city_zoos'] = self.model.objects.filter(
+            infoType=InfoTypes.Zoo.value,
+            city__name__contains=self.city_name)
+        context['city_museums'] = self.model.objects.filter(
+            infoType=InfoTypes.Museum.value,
+            city__name__contains=self.city_name)
+        context['city_restaurants'] = self.model.objects.filter(
+            infoType=InfoTypes.Restaurant.value,
+            city__name__contains=self.city_name)
+        context['city_info'] = self.model.objects.all()
         return context
-
-    def city_map(request, city_name):
-        try:
-            city = City.objects.get(name=city_name)
-        except City.DoesNotExist:
-            raise Http404("City does not exist")
-        return render(request, 'Website/city.html', {'city': city})
-
-    # read all info related to the city
-    def city_info(request, city_id):
-        try:
-            location_info = LocationInfo.objects.filter(city=city_id)
-        except LocationInfo.DoesNotExist:
-            raise Http404("Item not found")
-        return render(request, 'Website/city.html', {'location_info': location_info})
-
+    
 def Search(request):
     template_name = 'Website/search.html'
    
@@ -198,7 +225,6 @@ def review(request):
 
             user = Profile.objects.get(user_id=request.user)
             number = re.sub("[^0-9]", "", request.path)
-            # place_id = int(number)
             place = LocationInfo.objects.get(pk=1)
             rating = form.cleaned_data['rating']
             text = form.cleaned_data['text']

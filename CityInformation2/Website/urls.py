@@ -21,19 +21,28 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
     
     # /website/Brisbane
-    url(r'^(?P<city_name>Brisbane)/$', views.city_page, name='brisbane'),
+##    url(r'^(?P<city_name>Brisbane)/$', views.city_page, name='brisbane'),
+    url(r'^(?P<city_name>Brisbane)/$',
+        views.CityView.as_view(), name='brisbane'),
     # /website/Sydney
-    url(r'^(?P<city_name>Sydney)/$', views.city_page, name='sydney'),
+    url(r'^(?P<city_name>Sydney)/$',
+        views.CityView.as_view(), name='sydney'),
     # /website/Melbourne
-    url(r'^(?P<city_name>Melbourne)/$', views.city_page, name='melbourne'),
+    url(r'^(?P<city_name>Melbourne)/$',
+        views.CityView.as_view(), name='melbourne'),
     # /website/Hobart
-    url(r'^(?P<city_name>Hobart)/$', views.city_page, name='hobart'),
+    url(r'^(?P<city_name>Hobart)/$',
+        views.CityView.as_view(), name='hobart'),
     # /website/Darwin
-    url(r'^(?P<city_name>Darwin)/$', views.city_page, name='darwin'),
+    url(r'^(?P<city_name>Darwin)/$',
+        views.CityView.as_view(), name='darwin'),
     # /website/Perth
-    url(r'^(?P<city_name>Perth)/$', views.city_page, name='perth'),
+    url(r'^(?P<city_name>Perth)/$',
+        views.CityView.as_view(), name='perth'),
     # /website/Canberra
-    url(r'^(?P<city_name>Canberra)/$', views.city_page, name='canberra'),
+    url(r'^(?P<city_name>Canberra)/$',
+        views.CityView.as_view(), name='canberra'),
     # /website/Adelaide
-    url(r'^(?P<city_name>Adelaide)/$', views.city_page, name='adelaide'),
+    url(r'^(?P<city_name>Adelaide)/$',
+        views.CityView.as_view(), name='adelaide'),
 ]

@@ -1,19 +1,10 @@
 {% extends 'Website/base.html' %}
 {% block body %}
 	
-	<h1>{{city.name}}{{location_info.city}}</h1>
-	{% for x in location_info %}
-	<h2>{{ x.name }}</h2>
-	<h6>{{ x.phone }}</h6>
-	<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
-	{% endfor %}
-
-
-			<div id="map" style="width:400px;height:400px;"></div>
-			
-			<script>
+	<h1>{{the_city.name}}</h1>
+				<script>
 				function myMap() {
-				  var myCenter = new google.maps.LatLng({{city.latitude}},{{city.longitude}});
+				  var myCenter = new google.maps.LatLng({{the_city.latitude}},{{the_city.longitude}});
 				  var mapCanvas = document.getElementById("map");
 				  var mapOptions = {center: myCenter, zoom: 10};
 				  var map = new google.maps.Map(mapCanvas, mapOptions);
@@ -22,8 +13,199 @@
 				}
 			</script>
 			
+						<div id="map" style="width:400px;height:400px;"></div>
+			
 			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmjFijuozw5beUzVgLy9HtfrbgTCR1K6I&callback=myMap"></script>
-			<br/>
 
+	{% if user.profile.user_type == 'STUDENT' %}
+			<h3>Here are some colleges you might be interested in!</h3><br/>
+			
+		{% for x in city_colleges %}</h2>
+			<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		
+		<h3>Here are some libraries you might be interested in!</h3><br/>
+				{% for x in city_libraries %}</h2>
+			<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		
+					<br/><h3>Other City Information</h3><br/>	
+		{% for x in city_hotels %}</h2>
+			<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}	
+		{% for x in city_malls %}</h2>
+			<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_industries %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_zoos %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_museums %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_parks %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_restaurants %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+	{% endif %}
+	
+	{% if user.profile.user_type == 'BUSINESS' %}
+		<h3>Here are some industries you might be interested in!</h3><br/>	
+		{% for x in city_industries %}</h2>
+			<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+				<br/>
+						<h3>Here are some hotels you might be interested in!</h3><br/>	
+		{% for x in city_hotels %}</h2>
+			<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		
+		<br/><h3>Other City Information</h3><br/>
+			{% for x in city_colleges %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_libraries %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_zoos %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_museums %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_parks %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_restaurants %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+				{% for x in city_malls %}</h2>
+			<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+	{% endif %}
+	
+	{% if user.profile.user_type == 'TOURIST' %}		
+						<h3>Here are some hotels you might be interested in!</h3><br/>	
+		{% for x in city_hotels %}</h2>
+			<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+								<h3>Here are some shopping malls you might be interested in!</h3><br/>	
+		{% for x in city_malls %}</h2>
+			<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		
+			<br/><h3>Other City Information</h3><br/>
+			{% for x in city_colleges %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_libraries %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_industries %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_zoos %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_museums %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_parks %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+		{% for x in city_restaurants %}
+				<h4>{{x.name}}</h6>
+			<h6>{{ x.phone }}</h6>
+		<img src="{{x.image}}" alt="college.png" class="img-responsive" style="width:200px;height:200px" >
+		<a href="{% url 'Website:detail' x.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+		{% endfor %}
+	{% endif %}
+	
+	{% if user.profile.user_type == false %}
+	<h3>Please login or register to view city information</h3>
+	{% endif %}
+	
 			
 {%  endblock %}
