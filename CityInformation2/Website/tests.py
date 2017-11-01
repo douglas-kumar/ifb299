@@ -248,11 +248,20 @@ class Reviews(TestCase):
         self.assertEqual(review.text, self.text)
 
     
-#Stroy No: 08 - Multiple Cities (Calum)
+#Stroy No: 08 - Multiple Cities
 class MultipleCities(TestCase):
     model = City
+    qut = LocationInfo.objects.get(pk=1)
     brisbane = City.objects.get(pk=1)
     sydney = City.objects.get(pk=2)
+    melbourne = City.objects.get(pk=3)
+    canberra = City.objects.get(pk=4)
+    adelaide = City.objects.get(pk=5)
+    darwin = City.objects.get(pk=6)
+    hobart = City.objects.get(pk=7)
+    perth = City.objects.get(pk=8)
+    cairns = None
+    alice_springs = None
     cities = [
         'Brisbane',
         'Sydney',
@@ -266,14 +275,36 @@ class MultipleCities(TestCase):
     def test_cities_exist(self):
         self.assertIsNotNone(self.brisbane)
         self.assertIsNotNone(self.sydney)
-        # Continue
+        self.assertIsNotNone(self.melbourne)
+        self.assertIsNotNone(self.canberra)
+        self.assertIsNotNone(self.adelaide)
+        self.assertIsNotNone(self.darwin)
+        self.assertIsNotNone(self.hobart)
+        self.assertIsNotNone(self.perth)
 
+    def test_arbitrary_cities_non_existent(self):
+        self.assertIsNone(self.cairns)
+        self.assertIsNone(self.alice_springs)
+
+    def test_city_names(self):
+        self.assertEquals(self.cities[0], self.brisbane.name)
+        self.assertEquals(self.cities[1], self.sydney.name)
+
+        self.assertNotEquals(self.cities[0], self.sydney.name)
+        self.assertNotEquals(self.cities[4], self.darwin.name)
+
+    def locationInfo_connects_to_city(self):
+        self.assertEquals(self.qut.city, self.brisbane.id)
+        self.assertNotEquals(self.qut.city, self.sydney.id)
+        self.assertEquals('QUT', self.qut.name)
+        self.assertNotEquals('UQ', self.qut.name)
+        
 #Story No: 16 - Item Search
-class ItemSearch(TestCase):
-    QUT = LocationInfo(city="Brisbane", name="QUT", Address="55 Smith Street", email="qut@qut.edu.au", image="/Website/static/qut.png", phone="21212", info_type="0")
-    search_term = 'QUT'
-    info_type = "1"
-
-    def search_test(self):
-        test_data = LocationInfo.objects.filter(name=search_name).filter(infoType=info_type)
-        self.assertEqual(self.QUT, test_data)
+##class ItemSearch(TestCase):
+##    QUT = LocationInfo(city="Brisbane", name="QUT", Address="55 Smith Street", email="qut@qut.edu.au", image="/Website/static/qut.png", phone="21212", info_type="0")
+##    search_term = 'QUT'
+##    info_type = "1"
+##
+##    def search_test(self):
+##        test_data = LocationInfo.objects.filter(name=search_name).filter(infoType=info_type)
+##        self.assertEqual(self.QUT, test_data)
