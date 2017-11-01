@@ -9,7 +9,7 @@ from django.urls import reverse, resolve
 # To Run tests:
 # python manage.py test Website.tests
 
-# Story: S03 - Log In
+# Story No: 3 - Log In
 class CreateUserAndLogIn(TestCase):
     username = 'userToLogin'
     email = 'user2login@website.com'
@@ -226,6 +226,29 @@ class SortingItems(TestCase):
     def test_method(self):
         pass
 
+
+# Story No: 18 - Reviews
+class Reviews(TestCase):
+    rating = 3
+    text = "This review is a test to see if reviewing items works"
+    username = 'tester'
+    user = User.objects.get_or_create(username=username)
+    place = LocationInfo.objects.get(pk=3)
+    
+    def create_review(self):
+        review = Review.create(user, place, rating, text)
+        self.assertEqual(review.user, self.user)
+        self.assertEqual(review.place, self.place)
+        self.assertEqual(review.rating, self.rating)
+        self.assertEqual(review.text, self.text)
+        review.save()
+
+    def get_review(self):
+        review = Review.objects.get(user=self.user, place=self.place)
+        self.assertEqual(review.rating, self.rating)
+        self.assertEqual(review.text, self.text)
+
+    
 #Stroy No: 08 - Multiple Cities (Calum)
 class MultipleCities(TestCase):
     city = 'Brisbane'
