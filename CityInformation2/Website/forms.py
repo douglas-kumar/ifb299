@@ -9,6 +9,14 @@ ACCOUNT_TYPES = [
 
 INFO_TYPES = [
     ('0', 'College'),
+    ('1', 'Library'),
+    ('2', 'Indusry'),
+    ('3', 'Hotel'),
+    ('4', 'Park'),
+    ('5', 'Zoo'),
+    ('6',  'Museum'),
+    ('7', 'Restaurant'),
+    ('8', 'Mall'),
     ('9', 'All'),
 ]
 
