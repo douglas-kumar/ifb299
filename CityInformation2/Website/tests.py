@@ -255,3 +255,13 @@ class MultipleCities(TestCase):
     
     def test_XXXX(self):
         pass
+
+    #Story No: 16 - Item Search
+class ItemSearch(TestCase):
+    QUT = LocationInfo(city="Brisbane", name="QUT", Address="55 Smith Street", email="qut@qut.edu.au", image="/Website/static/qut.png", phone="21212", info_type="0")
+    search_term = 'QUT'
+    info_type = "1"
+
+    def search_test(self):
+        test_data = LocationInfo.objects.filter(name=search_name).filter(infoType=info_type)
+        self.assertEqual(self.QUT, test_data)
