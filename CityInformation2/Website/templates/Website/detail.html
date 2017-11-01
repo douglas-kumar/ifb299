@@ -32,11 +32,16 @@
 		</div>
 
 	<h2>Reviews</h2>
-	{% for rev in review %}
-	<strong>{{ rev.user }}</strong> <br/>
-	Rating: {{ rev.rating }} <br/>
-	{{ rev.text }} <br/><br/>
-	{% endfor %}
+	{% if total == 0 %}
+	<p><i>No reviews have been written for this item.</i></p>
+	{% endif %}
+	{% if total > 0 %}
+		{% for rev in review %}
+		<strong>{{ rev.user }}</strong> <br/>
+		Rating: {{ rev.rating }} <br/>
+		{{ rev.text }} <br/><br/>
+		{% endfor %}
+	{% endif %}
 
 	<!-- {% if user.username %}
 		<h3>Write a Review</h3>

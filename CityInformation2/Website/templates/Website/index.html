@@ -1,7 +1,10 @@
 {% extends 'Website/base.html' %}
 
 {% block body %}
-<!-- <h1>{{city.name}}</h1>
+<!-- 
+{% if not user.profile.user_type %}
+	<center><h3>Welcome!</h3></center>
+{% endif %}
 <div id="map" style="width:100%;height:400px;"></div>
 	<script>
 		function myMap() {
@@ -124,6 +127,18 @@
 	{% if user.profile.user_type == false %}
 	<h3>Please log in to view city information</3>
 	{% endif %}
+	 <div class="col-sm-12">
+        {% if not user.profile.user_type %}
+            <center>
+                <br>
+                <a href="/Website/login">Click here to Login</a>
+                <br>
+                <a href="/Website/register">Don't have an account? Click here!</a>
+
+            </center>
+        {% endif %}
+    </div>
+</div>
 
 {%  endblock %}
 
