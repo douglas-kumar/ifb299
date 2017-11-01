@@ -1,0 +1,54 @@
+{% extends 'Website/base.html' %}
+
+{% block body %}
+<center><h2>Topics<h2></center>
+    <center>
+        <table style="width:500px">
+            <tr>
+                <th>Topic Name</th>
+                <th>Place</th>
+                <th>Username</th>
+                <th>Replies</th>
+            </tr>
+            <tr>
+                <td><a href="">Awesome Restaurant</a></td>
+                <td>Steak Island</td>
+                <td>Steaklover43</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><a href="">Ants everywhere</a></td>
+                <td>Ants 'R' Us</td>
+                <td>Does_not_love_ants</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td><a href="">DO NOT GO HERE!!!!</a></td>
+                <td>Suncorp Toowong</td>
+                <td>Westpac Toowong</td>
+                <td>0</td>
+            </tr>
+        </table>
+    </center>
+
+    <center><h2>Add a new Topic</h2></center>
+    <center>
+    Select Venue:
+    <br>
+    <select style="width:200px;">
+        <option value="">UQ</option>
+    </select>
+    <br>
+    Topic Name:
+    <br>
+    <input type="text" style="width:200px">
+    <br>
+    Enter text here:
+    <br>
+    <textarea rows='5' cols='50'></textarea>
+    <br>
+    <input type="submit" value="Add new topic">
+    </center>
+
+
+{% endblock %}
