@@ -11,7 +11,6 @@ from .forms import *
 import re
 
 
-
 class IndexView(generic.ListView):
     template_name = 'Website/index.html'
     queryset = LocationInfo.objects.all()
@@ -30,6 +29,7 @@ class IndexView(generic.ListView):
             city__name__contains="Brisbane").order_by(order)
         return context
 
+
 class DetailView(generic.DetailView):
     model = LocationInfo
     form_class = ReviewForm
@@ -43,16 +43,16 @@ class DetailView(generic.DetailView):
         reviews = Review.objects.filter(place=location_info)
         total = len(reviews)
         context = {
-            'locationinfo' : location_info,
-            'review' : reviews,
-            'form' : form,
-            'total' : total,
+            'locationinfo': location_info,
+            'review': reviews,
+            'form': form,
+            'total': total,
         }
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        
+
         if (form.is_valid()):
             number = re.sub("[^0-9]", "", request.path)
             place_id = int(number)
@@ -66,21 +66,23 @@ class DetailView(generic.DetailView):
             reviews = Review.objects.filter(place=place)
             total = len(reviews)
             context = {
-                'form' : form,
+                'form': form,
                 'locationinfo': place,
-                'review' : reviews,
-                'total' : total,
+                'review': reviews,
+                'total': total,
             }
             return render(request, self.template_name, context)
+
 
 def city_page(request, city_name):
         city = City.objects.get(name=city_name)
         location_info = LocationInfo.objects.filter(city=city.id)
         context = {
-            'city' : city,
-            'location_info' : location_info,
+            'city': city,
+            'location_info': location_info,
         }
         return render(request, 'Website/city.html', context)
+
 
 class UserFormView(View):
     form_class = UserForm
@@ -102,10 +104,10 @@ class UserFormView(View):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             account_type = form.cleaned_data['account_type']
-            
+
             user.set_password(password)
             user.save()
-            
+
             # get user object to add account_type - get userId to get profile
             user_acc = User.objects.get(username=username)
             user_pk = user_acc.pk
@@ -123,13 +125,14 @@ class UserFormView(View):
 
         return render(request, self.template_name, {'form': form})
 
+
 class LoginFormView(View):
     form_class = LoginForm
     template_name = 'registration/login.html'
 
     def get(self, request):
         form = self.form_class(None)
-        return render(request, self.template_name, {'form' : form})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request):
         form = self.form_class(request.POST)
@@ -147,10 +150,12 @@ class LoginFormView(View):
 
         return render(request, self.template_name, {'form': form})
 
+
 def LogOut(request):
     logout(request)
     template_name = 'registration/logged_out.html'
     return render(request, template_name)
+
 
 class CityView(generic.ListView):
     template_name = 'Website/city.html'
@@ -162,7 +167,7 @@ class CityView(generic.ListView):
         self.city_name = self.kwargs['city_name']
         queryset = super(CityView, self).get_queryset()
         return queryset
-    
+
     def get_context_data(self, **kwargs):
         context = super(CityView, self).get_context_data(**kwargs)
         context['the_city'] = City.objects.get(name=self.city_name)
@@ -195,30 +200,39 @@ class CityView(generic.ListView):
         context['city_restaurants'] = self.model.objects.filter(
             infoType=InfoTypes.Restaurant.value,
             city__name__contains=self.city_name)
-        context['city_info'] = self.model.objects.all()
         return context
-    
+
+
 def Search(request):
     template_name = 'Website/search.html'
-   
+
     if request.method == 'GET':
         form = SearchForm(request.GET)
         if form.is_valid():
-        
             search_name = form.cleaned_data['search_name']
             info_type = form.cleaned_data['info_type']
             sorting_options = form.cleaned_data['sorting_options']
 
             if info_type == '9':
-                search = LocationInfo.objects.filter(name=search_name).order_by(sorting_options)
+                search = LocationInfo.objects.filter(
+                    name=search_name).order_by(sorting_options
+                                               )
             else:
-                search = LocationInfo.objects.filter(name=search_name).filter(infoType=info_type).order_by(sorting_options)
+                search = LocationInfo.objects.filter(
+                    name=search_name).filter(
+                        infoType=info_type).order_by(
+                            sorting_options
+                            )
         else:
             search = LocationInfo.objects.all()
             match = 1
-            return render(request, template_name, {'search': search, 'match': match})
-        
+            return render(request, template_name, {
+                'search': search,
+                'match': match
+                })
+
     return render(request, template_name, {'search': search})
+
 
 def review(request):
     template_name = 'Website/detail.html'
@@ -237,13 +251,14 @@ def review(request):
             review.save()
             reviews = Review.objects.filter(place=place)
             context = {
-                'form' : form,
+                'form': form,
                 'locationinfo': place,
-                'review' : reviews,
-                'user' : user,
+                'review': reviews,
+                'user': user,
             }
 
         return render(request, template_name, context)
+
 
 class ReviewFormView(View):
     model = LocationInfo
@@ -258,13 +273,13 @@ class ReviewFormView(View):
         location_info = self.model.objects.get(pk=place_id)
         reviews = Review.objects.filter(place=location_info)
         context = {
-            'location_info' : location_info,
-            'form' : form,
-            'review' : reviews,
-            'user' : user,
+            'location_info': location_info,
+            'form': form,
+            'review': reviews,
+            'user': user,
         }
         return render(request, self.template_name, context)
- 
+
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
 
@@ -281,9 +296,9 @@ class ReviewFormView(View):
             review.save()
             reviews = Review.objects.filter(place=place)
             context = {
-                'form' : form,
+                'form': form,
                 'location_info': place,
-                'review' : reviews,
-                'user' : user,
+                'review': reviews,
+                'user': user,
             }
             return render(request, self.template_name, context)

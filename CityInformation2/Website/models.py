@@ -19,7 +19,9 @@ class City(models.Model):
     def __str__(self):
         return self.name + " " + self.state
 
+
 class ChoiceEnum(Enum):
+
     @classmethod
     def choices(cls):
         # get all members of the class
@@ -29,6 +31,7 @@ class ChoiceEnum(Enum):
         # format into django choice tuple
         choices = tuple([(str(p[1].value), p[0]) for p in props])
         return choices
+
 
 class InfoTypes(ChoiceEnum):
     College = 0
@@ -41,6 +44,7 @@ class InfoTypes(ChoiceEnum):
     Restaurant = 7
     Mall = 8
 
+
 class LocationInfo(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=250)
@@ -50,13 +54,18 @@ class LocationInfo(models.Model):
     phone = models.CharField(max_length=250, null=True, blank=True)
     industryType = models.CharField(max_length=500, null=True, blank=True)
     departments = models.CharField(max_length=500, null=True, blank=True)
-    infoType = models.CharField(max_length=1, choices=InfoTypes.choices(), null=True)
+    infoType = models.CharField(
+        max_length=1,
+        choices=InfoTypes.choices(),
+        null=True
+        )
     favorites = GenericRelation(Favorite)
 
     def __str__(self):
         return self.name + ' - ' + self.address
-    
-# Extend the User model for user types   
+
+
+# Extend the User model for user types
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_type = models.CharField(max_length=250)
@@ -64,17 +73,19 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user) + " " + self.user_type
 
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
+
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
-# Model for User Reviews
 
+# Model for User Reviews
 class Review(models.Model):
     user = models.ForeignKey('Profile', on_delete=models.CASCADE)
     place = models.ForeignKey('LocationInfo', on_delete=models.CASCADE)

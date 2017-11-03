@@ -248,7 +248,7 @@ class Reviews(TestCase):
         self.assertEqual(review.text, self.text)
 
     
-#Stroy No: 08 - Multiple Cities
+#Story No: 08 - Multiple Cities
 class MultipleCities(TestCase):
     model = City
     qut = LocationInfo.objects.get(pk=1)
